@@ -1,5 +1,8 @@
 package domain.abstact;
 
+import com.googlecode.lanterna.TextCharacter;
+
+//сущность
 public abstract class Entity {
     private String name;
     private char symbol;
