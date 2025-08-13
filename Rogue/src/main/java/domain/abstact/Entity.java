@@ -32,7 +32,7 @@ public abstract class Entity {
         this.color = color;
     }
 
-    public Entity(String name, char symbol, byte color){
+    public Entity(String name, char symbol, byte color) {
         this.name = name;
         this.symbol = symbol;
         this.color = color;

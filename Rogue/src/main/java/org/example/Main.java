@@ -11,6 +11,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 
 import java.io.IOException;
+
 import domain.Player;
 
 //public class Main {
@@ -59,7 +60,7 @@ public class Main {
         try {
             int x = 5;
             int y = 5;
-            Player player = new Player("Ravil", '@', (byte)2, 100, 80, 60, 40);
+            Player player = new Player("Ravil", '@', (byte) 2, 100, 80, 60, 40);
 //            System.out.printf(" name = %s\n symbol = %c\n color = %d\n max_health = %d\n health = %d\n agility = %d\n strength = %d",
 //                    player.getName(), player.getSymbol(), player.getColor(), player.getMaxHealth(), player.getHealth(),
 //                    player.getAgility(), player.getStrength());
@@ -70,23 +71,25 @@ public class Main {
             screen.setCursorPosition(null);
             screen.setCharacter(x, y, new TextCharacter(player.getSymbol()));
             screen.refresh();
-            while (true){
+            while (true) {
                 KeyStroke key = screen.pollInput();
-                if(key != null){
+                if (key != null) {
                     if (key.getKeyType() == KeyType.Character) {
                         switch (key.getCharacter()) {
-                            case 'w' :
+                            case 'w':
                                 screen.clear();
                                 --y;
                                 break;
-                            case 's' :
+                            case 's':
                                 screen.clear();
                                 ++y;
                                 break;
-                            case 'a' : screen.clear();
+                            case 'a':
+                                screen.clear();
                                 --x;
                                 break;
-                            case 'd' : screen.clear();
+                            case 'd':
+                                screen.clear();
                                 ++x;
                                 break;
                         }
@@ -98,7 +101,7 @@ public class Main {
                 }
             }
             screen.stopScreen();
-        }catch (IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
