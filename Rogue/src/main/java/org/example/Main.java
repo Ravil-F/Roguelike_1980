@@ -13,6 +13,9 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import java.io.IOException;
 
 import domain.Player;
+import domain.Zombi;
+import domain.enums.Color;
+import domain.enums.EnemyType;
 
 //public class Main {
 //    public static void main(String[] args) {
@@ -57,53 +60,58 @@ import domain.Player;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            int x = 5;
-            int y = 5;
-            Player player = new Player("Ravil", '@', (byte) 2, 100, 80, 60, 40);
-//            System.out.printf(" name = %s\n symbol = %c\n color = %d\n max_health = %d\n health = %d\n agility = %d\n strength = %d",
-//                    player.getName(), player.getSymbol(), player.getColor(), player.getMaxHealth(), player.getHealth(),
-//                    player.getAgility(), player.getStrength());
+//        try {
+//            int x = 5;
+//            int y = 5;
+            Player player = new Player("Ravil", '@', Color.GREEN, 100, 80, 60, 40);
+            System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d",
+                    player.getName(), player.getSymbol(), player.getColor(), player.getMaxHealth(), player.getHealth(),
+                    player.getAgility(), player.getStrength());
 
-            Terminal terminal = new DefaultTerminalFactory().createTerminal();
-            TerminalScreen screen = new TerminalScreen(terminal);
-            screen.startScreen();
-            screen.setCursorPosition(null);
-            screen.setCharacter(x, y, new TextCharacter(player.getSymbol()));
-            screen.refresh();
-            while (true) {
-                KeyStroke key = screen.pollInput();
-                if (key != null) {
-                    if (key.getKeyType() == KeyType.Character) {
-                        switch (key.getCharacter()) {
-                            case 'w':
-                                screen.clear();
-                                --y;
-                                break;
-                            case 's':
-                                screen.clear();
-                                ++y;
-                                break;
-                            case 'a':
-                                screen.clear();
-                                --x;
-                                break;
-                            case 'd':
-                                screen.clear();
-                                ++x;
-                                break;
-                        }
-                    } else if (key.getKeyType() == KeyType.Escape) {
-                        break;
-                    }
-                    screen.setCharacter(x, y, new TextCharacter(player.getSymbol()));
-                    screen.refresh();
-                }
-            }
-            screen.stopScreen();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        Zombi z = new Zombi(EnemyType.ZOMBI);
+        System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d\n hostility = %s\n",
+                z.getName(), z.getSymbol(), z.getColor(), z.getMaxHealth(), z.getHealth(),
+                z.getAgility(), z.getStrength(), z.getHostility());
+
+//            Terminal terminal = new DefaultTerminalFactory().createTerminal();
+//            TerminalScreen screen = new TerminalScreen(terminal);
+//            screen.startScreen();
+//            screen.setCursorPosition(null);
+//            screen.setCharacter(x, y, new TextCharacter(player.getSymbol()));
+//            screen.refresh();
+//            while (true) {
+//                KeyStroke key = screen.pollInput();
+//                if (key != null) {
+//                    if (key.getKeyType() == KeyType.Character) {
+//                        switch (key.getCharacter()) {
+//                            case 'w':
+//                                screen.clear();
+//                                --y;
+//                                break;
+//                            case 's':
+//                                screen.clear();
+//                                ++y;
+//                                break;
+//                            case 'a':
+//                                screen.clear();
+//                                --x;
+//                                break;
+//                            case 'd':
+//                                screen.clear();
+//                                ++x;
+//                                break;
+//                        }
+//                    } else if (key.getKeyType() == KeyType.Escape) {
+//                        break;
+//                    }
+//                    screen.setCharacter(x, y, new TextCharacter(player.getSymbol()));
+//                    screen.refresh();
+//                }
+//            }
+//            screen.stopScreen();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 }

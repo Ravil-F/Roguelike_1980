@@ -1,5 +1,7 @@
 package domain.abstact;
 
+import domain.enums.Color;
+
 public abstract class Attributes extends Entity{
     private int maxHealth;
     private int health;
@@ -8,7 +10,7 @@ public abstract class Attributes extends Entity{
 
 //    constructor
     public Attributes(String name, char symbol,
-                      byte color, int maxHealth,
+                      Color color, int maxHealth,
                       int health, int agility,
                       int strength){
 
