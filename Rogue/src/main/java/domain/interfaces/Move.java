@@ -1,5 +1,5 @@
 package domain.interfaces;
 
 public interface Move {
-    void Move(int a);
+    int MovePlaeyr(int a, boolean bol);
 }
