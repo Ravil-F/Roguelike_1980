@@ -64,13 +64,13 @@ public class Main {
         try {
             int x = 5;
             int y = 5;
-            Player player = new Player("Ravil", '@', Color.GREEN, 100, 80, 60, 40);
-            System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d",
-                    player.getName(), player.getSymbol(), player.getColor(), player.getMaxHealth(), player.getHealth(),
-                    player.getAgility(), player.getStrength());
-            player.setCoord(x, y);
+            Player player = new Player("Ravil", '@', Color.GREEN, 100, 80, 60, 40, x, y);
 
-        Zombi z = new Zombi(EnemyType.ZOMBI);
+            System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d\n x = %d\n y = %d\n",
+                    player.getName(), player.getSymbol(), player.getColor(), player.getMaxHealth(), player.getHealth(),
+                    player.getAgility(), player.getStrength(), player.getCoord().getX(), player.getCoord().getY());
+
+        Zombi z = new Zombi(EnemyType.ZOMBI, x + 2, y + 2);
         System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d\n hostility = %s\n",
                 z.getName(), z.getSymbol(), z.getColor(), z.getMaxHealth(), z.getHealth(),
                 z.getAgility(), z.getStrength(), z.getHostility());
@@ -84,9 +84,9 @@ public class Main {
             textGraphics.setForegroundColor(Color.GREEN.getColor());
 
             // Отображение символа на экране
-            textGraphics.putString(x, y,String.valueOf(player.getSymbol()));
+            textGraphics.putString(player.getCoord().getX(), player.getCoord().getY(),String.valueOf(player.getSymbol()));
 
-            screen.setCharacter(x+2, y+2, new TextCharacter(z.getSymbol()));
+            textGraphics.putString(z.getCoord().getX(), z.getCoord().getY(),String.valueOf(z.getSymbol()));
             screen.refresh();
             while (true) {
                 KeyStroke key = screen.pollInput();
@@ -95,26 +95,27 @@ public class Main {
                         switch (key.getCharacter()) {
                             case 'w':
                                 screen.clear();
-                              
-//                                y = player.MovePlaeyr(y, false);
+                                y = player.MovePlayer(y, false);
                                 break;
                             case 's':
                                 screen.clear();
-                                y =player.MovePlaeyr(y, true);
+                                y =player.MovePlayer(y, true);
                                 break;
                             case 'a':
                                 screen.clear();
-                                x = player.MovePlaeyr(x, false);
+                                x = player.MovePlayer(x, false);
                                 break;
                             case 'd':
                                 screen.clear();
-                                x = player.MovePlaeyr(x, true);
+                                x = player.MovePlayer(x, true);
                                 break;
                         }
                     } else if (key.getKeyType() == KeyType.Escape) {
                         break;
                     }
-                    textGraphics.putString(x, y,String.valueOf(player.getSymbol()));
+                    player.setCoord(x, y);
+                    System.out.printf(" x = %d\n y = %d\n", player.getCoord().getX(), player.getCoord().getY());
+                    textGraphics.putString(player.getCoord().getX(), player.getCoord().getY(),String.valueOf(player.getSymbol()));
                     screen.refresh();
                 }
             }

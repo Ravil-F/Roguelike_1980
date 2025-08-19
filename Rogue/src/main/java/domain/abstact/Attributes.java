@@ -12,9 +12,9 @@ public abstract class Attributes extends Entity{
     public Attributes(String name, char symbol,
                       Color color, int maxHealth,
                       int health, int agility,
-                      int strength){
+                      int strength, int x, int y){
 
-        super(name, symbol, color);
+        super(name, symbol, color, x, y);
         this.maxHealth = maxHealth;
         this.health= health;
         this.agility = agility;

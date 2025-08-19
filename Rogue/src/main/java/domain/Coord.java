@@ -25,7 +25,7 @@ public class Coord {
         this.y = y;
     }
 
-    public Coord add(Coord other){
-        return new Coord(this.getX() + other.getX(), this.getY() + other.getY());
+    public Coord add(int x, int y){
+        return new Coord(x, y);
     }
 }

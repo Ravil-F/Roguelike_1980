@@ -1,17 +1,17 @@
 package domain.enums;
 
 public enum Hostility {
-    LOW(1),
-    MEDIUM(3),
-    HIGH(5);
+    LOW(2),
+    MEDIUM(4),
+    HIGH(6);
 
-    private final int visibilityCell;
+    private final int hostilityType;
 
-    Hostility(int visibilityCell) {
-        this.visibilityCell = visibilityCell;
+    Hostility(int  hostilityType) {
+        this. hostilityType =  hostilityType;
     }
 
     public int getVisibilityCell() {
-        return visibilityCell;
+        return  hostilityType;
     }
 }

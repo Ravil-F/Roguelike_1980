@@ -10,8 +10,8 @@ public abstract class Enemy extends Attributes {
     private final Hostility hostility;
 
 
-    public Enemy(EnemyType enemyType){
-        super(enemyType.getName(), enemyType.getSymbol(), enemyType.getColor(), enemyType.getMaxHealth(), enemyType.getHealth(), enemyType.getAgality(), enemyType.getStrength());
+    public Enemy(EnemyType enemyType, int x, int y){
+        super(enemyType.getName(), enemyType.getSymbol(), enemyType.getColor(), enemyType.getMaxHealth(), enemyType.getHealth(), enemyType.getAgality(), enemyType.getStrength(), x, y);
         this.hostility = enemyType.getHostility();
     }
 
