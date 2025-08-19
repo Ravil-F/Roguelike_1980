@@ -2,14 +2,14 @@ package domain.enums;
 
 import com.googlecode.lanterna.TextColor;
 
-public enum Color {
+public enum ColorE {
     GREEN (TextColor.ANSI.GREEN),
     RED(TextColor.ANSI.RED),
     WHITE(TextColor.ANSI.WHITE),
     YELLOW(TextColor.ANSI.YELLOW);
 
     private final TextColor.ANSI color;
-    Color(TextColor.ANSI color) {
+    ColorE(TextColor.ANSI color) {
         this.color = color;
     }
 

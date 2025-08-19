@@ -1,4 +1,4 @@
-package domain;
+package domain.common;
 
 public class Coord {
     private int x;

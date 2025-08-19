@@ -1,14 +1,13 @@
 package domain.abstact;
 
-import com.googlecode.lanterna.TextCharacter;
-import domain.enums.Color;
-import domain.Coord;
+import domain.enums.ColorE;
+import domain.common.Coord;
 
 //сущность
 public abstract class Entity {
     private String name;
     private char symbol;
-    private Color color;
+    private ColorE color;
     private Coord coord;
 
     public String getName() {
@@ -27,11 +26,11 @@ public abstract class Entity {
         this.symbol = symbol;
     }
 
-    public Color getColor() {
+    public ColorE getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    public void setColor(ColorE color) {
         this.color = color;
     }
 
@@ -43,7 +42,7 @@ public abstract class Entity {
         this.coord = coord.add(x, y);
     }
 
-    public Entity(String name, char symbol, Color color, int x, int y) {
+    public Entity(String name, char symbol, ColorE color, int x, int y) {
         this.name = name;
         this.symbol = symbol;
         this.color = color;

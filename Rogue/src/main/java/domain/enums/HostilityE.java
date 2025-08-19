@@ -1,13 +1,13 @@
 package domain.enums;
 
-public enum Hostility {
+public enum HostilityE {
     LOW(2),
     MEDIUM(4),
     HIGH(6);
 
     private final int hostilityType;
 
-    Hostility(int  hostilityType) {
+    HostilityE(int  hostilityType) {
         this. hostilityType =  hostilityType;
     }
 

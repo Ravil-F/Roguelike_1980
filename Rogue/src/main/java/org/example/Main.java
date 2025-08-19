@@ -1,22 +1,18 @@
 package org.example;
 
-import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
-import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-import com.googlecode.lanterna.graphics.TextGraphics;
 
 import java.io.IOException;
 
 import domain.Player;
-import domain.Zombi;
-import domain.enums.Color;
-import domain.enums.EnemyType;
+import domain.enemy.Zombi;
+import domain.enums.ColorE;
+import domain.enums.EnemyE;
 
 //public class Main {
 //    public static void main(String[] args) {
@@ -64,13 +60,13 @@ public class Main {
         try {
             int x = 5;
             int y = 5;
-            Player player = new Player("Ravil", '@', Color.GREEN, 100, 80, 60, 40, x, y);
+            Player player = new Player("Ravil", '@', ColorE.GREEN, 100, 80, 60, 40, x, y);
 
             System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d\n x = %d\n y = %d\n",
                     player.getName(), player.getSymbol(), player.getColor(), player.getMaxHealth(), player.getHealth(),
                     player.getAgility(), player.getStrength(), player.getCoord().getX(), player.getCoord().getY());
 
-        Zombi z = new Zombi(EnemyType.ZOMBI, x + 2, y + 2);
+        Zombi z = new Zombi(EnemyE.ZOMBI, x + 2, y + 2);
         System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d\n hostility = %s\n",
                 z.getName(), z.getSymbol(), z.getColor(), z.getMaxHealth(), z.getHealth(),
                 z.getAgility(), z.getStrength(), z.getHostility());
@@ -81,7 +77,7 @@ public class Main {
             TextGraphics textGraphics = screen.newTextGraphics();
 
             // Установка цвета текста
-            textGraphics.setForegroundColor(Color.GREEN.getColor());
+            textGraphics.setForegroundColor(ColorE.GREEN.getColor());
 
             // Отображение символа на экране
             textGraphics.putString(player.getCoord().getX(), player.getCoord().getY(),String.valueOf(player.getSymbol()));

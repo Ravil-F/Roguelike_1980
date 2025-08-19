@@ -1,9 +1,9 @@
-package domain;
+package domain.enemy;
 import domain.abstact.Enemy;
-import domain.enums.EnemyType;
+import domain.enums.EnemyE;
 
 public class Zombi extends Enemy{
-    public Zombi(EnemyType enemyType, int x, int y) {
+    public Zombi(EnemyE enemyType, int x, int y) {
         super(enemyType, x, y);
     }
 }
