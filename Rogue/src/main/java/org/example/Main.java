@@ -1,18 +1,6 @@
 package org.example;
 
-import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.TerminalScreen;
-import com.googlecode.lanterna.terminal.Terminal;
-import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
-
-import java.io.IOException;
-
-import domain.Player;
-import domain.enemy.Zombi;
-import domain.enums.ColorE;
-import domain.enums.EnemyE;
+import presentation.View;
 
 //public class Main {
 //    public static void main(String[] args) {
@@ -57,68 +45,83 @@ import domain.enums.EnemyE;
 
 public class Main {
     public static void main(String[] args) {
-        try {
-            int x = 5;
-            int y = 5;
-            Player player = new Player("Ravil", '@', ColorE.GREEN, 100, 80, 60, 40, x, y);
+        startGame();
 
-            System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d\n x = %d\n y = %d\n",
-                    player.getName(), player.getSymbol(), player.getColor(), player.getMaxHealth(), player.getHealth(),
-                    player.getAgility(), player.getStrength(), player.getCoord().getX(), player.getCoord().getY());
 
-        Zombi z = new Zombi(EnemyE.ZOMBI, x + 2, y + 2);
-        System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d\n hostility = %s\n",
-                z.getName(), z.getSymbol(), z.getColor(), z.getMaxHealth(), z.getHealth(),
-                z.getAgility(), z.getStrength(), z.getHostility());
+//        try {
+//            int x = 5;
+//            int y = 5;
+//            Player player = new Player("Ravil", '@', ColorE.GREEN, 100, 80, 60, 40, x, y);
+//            System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d\n x = %d\n y = %d\n",
+//                    player.getName(), player.getSymbol(), player.getColor(), player.getMaxHealth(), player.getHealth(),
+//                    player.getAgility(), player.getStrength(), player.getCoord().getX(), player.getCoord().getY());
+//
+//
+//            Food bread = new Food(FoodE.MEAT_F, x + 5, y + 5);
+//            System.out.printf(" name = %s\n symbol = %c\n increase = %d\n",
+//                    bread.getName(), bread.getSymbol(), bread.getIncrease());
+//            player.setBackpack(bread);
+//            System.out.printf("increase Item: %d", player.getBackpack().getItemsIncrease());
+//
+//            Zombi z = new Zombi(EnemyE.ZOMBI, x + 2, y + 2);
+//            System.out.printf(" name = %s\n symbol = %c\n color = %s\n max_health = %d\n health = %d\n agility = %d\n strength = %d\n hostility = %s\n",
+//                    z.getName(), z.getSymbol(), z.getColor(), z.getMaxHealth(), z.getHealth(),
+//                    z.getAgility(), z.getStrength(), z.getHostility());
+//
+//            Terminal terminal = new DefaultTerminalFactory().createTerminal();
+//            TerminalScreen screen = new TerminalScreen(terminal);
+//            screen.startScreen();
+//            TextGraphics textGraphics = screen.newTextGraphics();
+//
+//            // Установка цвета текста
+//            textGraphics.setForegroundColor(ColorE.GREEN.getColor());
+//
+//            // Отображение символа на экране
+//            textGraphics.putString(player.getCoord().getX(), player.getCoord().getY(),String.valueOf(player.getSymbol()));
+//            textGraphics.putString(bread.getCoord().getX(), bread.getCoord().getY(),String.valueOf(bread.getSymbol()));
+//            textGraphics.putString(z.getCoord().getX(), z.getCoord().getY(),String.valueOf(z.getSymbol()));
+//            screen.refresh();
+//            while (true) {
+//                KeyStroke key = screen.pollInput();
+//                if (key != null) {
+//                    if (key.getKeyType() == KeyType.Character) {
+//                        switch (key.getCharacter()) {
+//                            case 'w':
+//                                screen.clear();
+//                                y = player.MovePlayer(y, false);
+//                                break;
+//                            case 's':
+//                                screen.clear();
+//                                y =player.MovePlayer(y, true);
+//                                break;
+//                            case 'a':
+//                                screen.clear();
+//                                x = player.MovePlayer(x, false);
+//                                break;
+//                            case 'd':
+//                                screen.clear();
+//                                x = player.MovePlayer(x, true);
+//                                break;
+//                        }
+//                    } else if (key.getKeyType() == KeyType.Escape) {
+//                        break;
+//                    }
+//                    player.setCoord(x, y);
+//                    textGraphics.putString(player.getCoord().getX(), player.getCoord().getY(),String.valueOf(player.getSymbol()));
+//                    textGraphics.putString(bread.getCoord().getX(), bread.getCoord().getY(),String.valueOf(bread.getSymbol()));
+//                    textGraphics.putString(z.getCoord().getX(), z.getCoord().getY(),String.valueOf(z.getSymbol()));
+//                    screen.refresh();
+//                }
+//            }
+//            screen.stopScreen();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-            Terminal terminal = new DefaultTerminalFactory().createTerminal();
-            TerminalScreen screen = new TerminalScreen(terminal);
-            screen.startScreen();
-            TextGraphics textGraphics = screen.newTextGraphics();
+    }
 
-            // Установка цвета текста
-            textGraphics.setForegroundColor(ColorE.GREEN.getColor());
-
-            // Отображение символа на экране
-            textGraphics.putString(player.getCoord().getX(), player.getCoord().getY(),String.valueOf(player.getSymbol()));
-
-            textGraphics.putString(z.getCoord().getX(), z.getCoord().getY(),String.valueOf(z.getSymbol()));
-            screen.refresh();
-            while (true) {
-                KeyStroke key = screen.pollInput();
-                if (key != null) {
-                    if (key.getKeyType() == KeyType.Character) {
-                        switch (key.getCharacter()) {
-                            case 'w':
-                                screen.clear();
-                                y = player.MovePlayer(y, false);
-                                break;
-                            case 's':
-                                screen.clear();
-                                y =player.MovePlayer(y, true);
-                                break;
-                            case 'a':
-                                screen.clear();
-                                x = player.MovePlayer(x, false);
-                                break;
-                            case 'd':
-                                screen.clear();
-                                x = player.MovePlayer(x, true);
-                                break;
-                        }
-                    } else if (key.getKeyType() == KeyType.Escape) {
-                        break;
-                    }
-                    player.setCoord(x, y);
-                    System.out.printf(" x = %d\n y = %d\n", player.getCoord().getX(), player.getCoord().getY());
-                    textGraphics.putString(player.getCoord().getX(), player.getCoord().getY(),String.valueOf(player.getSymbol()));
-                    screen.refresh();
-                }
-            }
-            screen.stopScreen();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    private static void startGame(){
+        View window = new View(20, 20);
+        window.startWindow();
     }
 }
