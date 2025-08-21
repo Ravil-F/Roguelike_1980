@@ -1,7 +1,11 @@
 package org.example;
 
+import domain.Model;
+import presentation.Controller;
 import presentation.View;
 
+import javax.swing.*;
+import java.io.IOException;
 //public class Main {
 //    public static void main(String[] args) {
 //        try {
@@ -44,7 +48,7 @@ import presentation.View;
 //}
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         startGame();
 
 
@@ -120,8 +124,19 @@ public class Main {
 
     }
 
-    private static void startGame(){
-        View window = new View(20, 20);
-        window.startWindow();
+    private static void startGame() throws IOException {
+        Model model = new Model();
+        Controller controller = new Controller(model);
+        View view = new View(controller,20, 20);
+        boolean flag = true;
+        KeyStroke key;
+        while (flag){
+            view.startWindow();
+            view.setKey();
+            flag = controller.userInput(view.getKey(), flag);
+        }
+        view.stopWidows();
+
+
     }
 }

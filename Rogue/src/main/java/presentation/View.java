@@ -4,7 +4,9 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.input.KeyStroke;
 
+import javax.swing.*;
 import java.io.IOException;
 
 
@@ -15,8 +17,12 @@ public class View {
     private int height;
     private TextGraphics textGraphics;
 
-    public View( int width, int height) {
+    private Controller controller;
+    private KeyStroke key;
+
+    public View(Controller controller, int width, int height) {
         try {
+            this.controller = controller;
             this.terminal = new DefaultTerminalFactory().createTerminal();
             this.screen = new TerminalScreen(terminal);
             this.width = width;
@@ -48,5 +54,19 @@ public class View {
 
     public int getHeight() {
         return height;
+    }
+
+    public KeyStroke getKey() {
+        return key;
+    }
+
+    public void setKey() throws IOException {
+        KeyStroke tmp = screen.pollInput();
+        if (tmp != null)
+            this.key = tmp;
+    }
+
+    public void stopWidows() throws IOException {
+        screen.stopScreen();
     }
 }
