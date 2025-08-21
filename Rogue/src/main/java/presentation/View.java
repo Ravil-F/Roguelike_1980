@@ -37,10 +37,9 @@ public class View {
 
     public void startWindow(){
         try {
-            textGraphics.putString(1,2, ">>");
-            textGraphics.putString(4, 2, "New game");
-            textGraphics.putString(4, 3, "Load save game");
-            textGraphics.putString(4, 4, "Exit game");
+            textGraphics.putString(4, 2, "1      - New game");
+            textGraphics.putString(4, 3, "2      - Load save game");
+            textGraphics.putString(4, 4, "Escape - Exit game");
             screen.refresh();
         }catch (IOException e) {
             e.printStackTrace();

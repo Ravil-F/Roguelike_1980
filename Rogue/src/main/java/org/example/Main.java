@@ -4,7 +4,6 @@ import domain.Model;
 import presentation.Controller;
 import presentation.View;
 
-import javax.swing.*;
 import java.io.IOException;
 //public class Main {
 //    public static void main(String[] args) {
@@ -129,7 +128,6 @@ public class Main {
         Controller controller = new Controller(model);
         View view = new View(controller,20, 20);
         boolean flag = true;
-        KeyStroke key;
         while (flag){
             view.startWindow();
             view.setKey();
