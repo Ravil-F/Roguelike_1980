@@ -1,4 +1,4 @@
-package domain;
+package domain.player;
 
 import domain.abstact.Attributes;
 import domain.abstact.Items;
@@ -6,10 +6,13 @@ import domain.backpack.Backpack;
 import domain.enums.ColorE;
 import domain.interfaces.Move;
 
-import java.util.Iterator;
-
 public class Player extends Attributes implements Move {
     private Backpack backpack;
+
+    public Player(){
+        super("Player", '@', ColorE.WHITE, 100, 100, 0, 0, 5, 5);
+        backpack = new Backpack();
+    }
 
     public Player(String name, char symbol, ColorE color, int maxHealth, int health, int agility, int strength, int x, int y) {
         super(name, symbol, color, maxHealth, health, agility, strength, x, y);

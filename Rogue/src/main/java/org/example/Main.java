@@ -126,12 +126,13 @@ public class Main {
     private static void startGame() throws IOException {
         Model model = new Model();
         Controller controller = new Controller(model);
-        View view = new View(controller,20, 20);
+        View view = new View(controller);
         boolean flag = true;
         while (flag){
             view.startWindow();
             view.setKey();
             flag = controller.userInput(view.getKey(), flag);
+            view.ViewMap();
         }
         view.stopWidows();
 
