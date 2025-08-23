@@ -1,10 +1,16 @@
 package org.example;
 
+import com.googlecode.lanterna.input.KeyType;
 import domain.Model;
+import domain.utils.inputScan;
 import presentation.Controller;
 import presentation.View;
 
 import java.io.IOException;
+import domain.utils.inputScan;
+
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 //public class Main {
 //    public static void main(String[] args) {
 //        try {
@@ -128,14 +134,31 @@ public class Main {
         Controller controller = new Controller(model);
         View view = new View(controller);
         boolean flag = true;
-        while (flag){
+        int count = 0;
+        inputScan scan;
+        while (flag) {
             view.startWindow();
             view.setKey();
-            flag = controller.userInput(view.getKey(), flag);
-            view.ViewMap();
+//            flag = controller.userInput(view.getKey(), flag);
+//            if (view.getKey() != null) {
+                if (view.getKey().getKeyType() == KeyType.Character) {
+                    switch (view.getKey().getCharacter()) {
+                        case '1':
+//                            scan = new inputScan();
+                            String namePlayer = view.inputScan();
+                            model.gameSession(namePlayer);
+                            break;
+                        case '2':
+                            System.out.println("world");
+                            break;
+                    }
+                }
+//            } else
+            if (view.getKey().getKeyType() == KeyType.Escape) {
+                flag = false;
+                view.ViewMap();
+            }
         }
         view.stopWidows();
-
-
     }
 }

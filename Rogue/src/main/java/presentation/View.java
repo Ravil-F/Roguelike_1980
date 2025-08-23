@@ -1,6 +1,7 @@
 package presentation;
 
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
@@ -57,17 +58,29 @@ public class View {
         screen.stopScreen();
     }
 
-    public String SetViewNamePlaeyr(){
-        String line;
-        while (line.isEmpty()){
-            textGraphics.putString("Enter name Player: ");
-        }
+    public String inputScan() throws IOException{
+        StringBuilder res = new StringBuilder();
+        char symbol = ' ';
+        int i = 5;
+        textGraphics.putString(4, 2, "Enter name Player: ");
+        do{
+          key = screen.readInput();
+          if((key.getCharacter() != ' ') && (key.getKeyType() == KeyType.Enter))
+              break;
+            symbol = key.getCharacter();
+          textGraphics.putString(i, 2, String.valueOf(symbol));
+          screen.refresh();
+          ++i;
+        }while (true);
+        return res.toString().trim();
     }
 
     public void ViewMap(){
+        String tmp = "0";
         for(int x = 0; x < controller.getModel().getMap().getWidth(); ++x){
             for (int y = 0; y < controller.getModel().getMap().getHeight(); ++y){
-                textGraphics.putString(x, y, controller.getModel().getMap().getMap(x, y));
+                if (controller.getModel().getMap().getMap(x, y) !=  tmp)
+                    textGraphics.putString(x, y, controller.getModel().getMap().getMap(x, y));
             }
         }
     }
