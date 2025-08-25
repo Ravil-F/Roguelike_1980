@@ -10,7 +10,7 @@ public class Player extends Attributes implements Move {
     private Backpack backpack;
 
     public Player(){
-        super("Player", '@', ColorE.WHITE, 100, 100, 0, 0, 5, 5);
+        super("Player", '@', ColorE.RED, 100, 100, 0, 0, 5, 5);
         backpack = new Backpack();
     }
 

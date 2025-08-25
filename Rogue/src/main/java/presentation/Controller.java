@@ -7,14 +7,13 @@ import domain.Model;
 public class Controller {
     private Model model;
     private KeyStroke key;
-//    private inputScan scan;
 
     public Controller(Model model){
         this.model = model;
 
     }
 
-    public boolean userInput(KeyStroke key, boolean flag){
+    public void userInput(KeyStroke key, boolean flag){
         if(key!= null){
             if(key.getKeyType() == KeyType.Character){
                 switch (key.getCharacter()){
@@ -26,14 +25,21 @@ public class Controller {
                     case '2':
                         System.out.println("world");
                         break;
+                    default:
+                        break;
                 }
             } else if (key.getKeyType() == KeyType.Escape) {
                 flag = false;
             }
         }
-        return flag;
     }
 
+    public void passName(String namePlayer){
+        model.gameSession(namePlayer);
+    }
+
+
+    //GET-SET METOD
     public Model getModel() {
         return model;
     }

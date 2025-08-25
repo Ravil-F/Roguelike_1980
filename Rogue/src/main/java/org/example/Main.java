@@ -135,30 +135,31 @@ public class Main {
         View view = new View(controller);
         boolean flag = true;
         int count = 0;
-        inputScan scan;
+        view.startWindow();
         while (flag) {
-            view.startWindow();
             view.setKey();
-//            flag = controller.userInput(view.getKey(), flag);
-//            if (view.getKey() != null) {
+            if (view.getKey() != null) {
                 if (view.getKey().getKeyType() == KeyType.Character) {
                     switch (view.getKey().getCharacter()) {
                         case '1':
-//                            scan = new inputScan();
+                            view.getScreen().refresh();
                             String namePlayer = view.inputScan();
-                            model.gameSession(namePlayer);
+                            view.passName(namePlayer);
+                            view.gameLoop();
                             break;
                         case '2':
                             System.out.println("world");
                             break;
+                        default:
+                            break;
                     }
                 }
-//            } else
-            if (view.getKey().getKeyType() == KeyType.Escape) {
-                flag = false;
-                view.ViewMap();
+                if (view.getKey().getKeyType() == KeyType.Escape) {
+                    flag = false;
+                }
             }
         }
+
         view.stopWidows();
     }
 }

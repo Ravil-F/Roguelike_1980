@@ -7,7 +7,6 @@ import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.input.KeyStroke;
 
-import javax.swing.*;
 import java.io.IOException;
 
 
@@ -27,11 +26,13 @@ public class View {
             textGraphics = screen.newTextGraphics();
             screen.startScreen();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }
 
+
+    // VIEW WINDOWS
     public void startWindow(){
         try {
             textGraphics.putString(4, 2, "1      - New game");
@@ -39,11 +40,55 @@ public class View {
             textGraphics.putString(4, 4, "Escape - Exit game");
             screen.refresh();
         }catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
     }
 
+    public String inputScan() throws IOException{
+        StringBuilder res = new StringBuilder();
+        screen.clear();
+        char symbol;
+        int i = 23;
+        textGraphics.putString(4, 2, "Enter name Player:");
+        screen.refresh();
+        do{
+            key = screen.readInput();
+            if((key.getCharacter() != ' ') && (key.getKeyType() == KeyType.Enter))
+                break;
+            symbol = key.getCharacter();
+            textGraphics.putString(i, 2, String.valueOf(symbol));
+            res.append(symbol);
+            screen.refresh();
+            ++i;
+        }while (true);
+        return res.toString().trim();
+    }
+
+    private void viewMap(){
+        String tmp = "0";
+        for(int x = 0; x < controller.getModel().getMap().getWidth(); ++x){
+            for (int y = 0; y < controller.getModel().getMap().getHeight(); ++y){
+                if (!controller.getModel().getMap().getMap(x, y).equals(tmp))
+                    textGraphics.putString(x, y, String.valueOf(controller.getModel().getMap().getMap(x, y)));
+            }
+        }
+    }
+
+    private void viewGameOver(){
+        try {
+            screen.clear();
+            textGraphics.putString(4, 2, "Game Over, " + controller.getModel().getPlayer().getName());
+            screen.refresh();
+            Thread.sleep(3000);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+    // END VIEW WINDOWS
+
+
+    // GET-SET METOD
     public KeyStroke getKey() {
         return key;
     }
@@ -54,34 +99,46 @@ public class View {
             this.key = tmp;
     }
 
+        public TerminalScreen getScreen() {
+        return screen;
+    }
+
+    public void setScreen(TerminalScreen screen) {
+        this.screen = screen;
+    }
+    //END GET-SET METOD
+
+
+    public void passName(String namePlayer){
+        controller.passName(namePlayer);
+    }
+
+    public void gameLoop() throws IOException {
+        try{
+            while (true){
+                screen.clear();
+                setKey();
+                if (key != null){
+                    if (key.getKeyType() == KeyType.Escape){
+                        viewGameOver();
+                        break;
+                    }
+                    if (key.getKeyType() == KeyType.Character)
+                        controller.userInput(key, true);
+                    viewMap();
+                    Thread.sleep(1000);
+                    screen.refresh();
+
+                }
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
     public void stopWidows() throws IOException {
         screen.stopScreen();
     }
 
-    public String inputScan() throws IOException{
-        StringBuilder res = new StringBuilder();
-        char symbol = ' ';
-        int i = 5;
-        textGraphics.putString(4, 2, "Enter name Player: ");
-        do{
-          key = screen.readInput();
-          if((key.getCharacter() != ' ') && (key.getKeyType() == KeyType.Enter))
-              break;
-            symbol = key.getCharacter();
-          textGraphics.putString(i, 2, String.valueOf(symbol));
-          screen.refresh();
-          ++i;
-        }while (true);
-        return res.toString().trim();
-    }
 
-    public void ViewMap(){
-        String tmp = "0";
-        for(int x = 0; x < controller.getModel().getMap().getWidth(); ++x){
-            for (int y = 0; y < controller.getModel().getMap().getHeight(); ++y){
-                if (controller.getModel().getMap().getMap(x, y) !=  tmp)
-                    textGraphics.putString(x, y, controller.getModel().getMap().getMap(x, y));
-            }
-        }
-    }
 }

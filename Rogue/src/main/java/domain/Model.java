@@ -18,7 +18,24 @@ public class Model {
         map.setMap(player.getCoord().getX(), player.getCoord().getY(), player.getSymbol());
     }
 
+
+
+
+    //get - set metod
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     public Map getMap() {
         return map;
+    }
+
+    public void setMap(Map map) {
+        this.map = map;
     }
 }
