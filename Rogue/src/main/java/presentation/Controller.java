@@ -17,11 +17,19 @@ public class Controller {
         if(key!= null){
             if(key.getKeyType() == KeyType.Character){
                 switch (key.getCharacter()){
-                    case '1':
-//                        scan = new inputScan();
-//                        String namePlayer = scan.scanLine("Enter name Player: ");
-//                        model.gameSession(namePlayer);
+                    case 'w':
+                    case 'W':
                         break;
+                    case 's':
+                    case 'S':
+                        break;
+                    case 'a':
+                    case 'A':
+                        break;
+                    case 'd':
+                    case 'D':
+                        break;
+                    case '1':
                     case '2':
                         System.out.println("world");
                         break;
