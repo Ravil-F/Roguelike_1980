@@ -96,7 +96,7 @@ public class Main {
 //                    if (key.getKeyType() == KeyType.Character) {
 //                        switch (key.getCharacter()) {
 //                            case 'w':
-//                                screen.clear();
+//                                screen.clear();x
 //                                y = player.MovePlayer(y, false);
 //                                break;
 //                            case 's':
@@ -133,10 +133,14 @@ public class Main {
         Model model = new Model();
         Controller controller = new Controller(model);
         View view = new View(controller);
-        boolean flag = true;
-        int count = 0;
+
         view.startWindow();
-        while (flag) {
+        startGameLoop(view, controller, model);
+        view.stopWidows();
+    }
+
+    private static void startGameLoop(View view, Controller controller, Model model) throws IOException{
+        while (true) {
             view.setKey();
             if (view.getKey() != null) {
                 if (view.getKey().getKeyType() == KeyType.Character) {
@@ -155,11 +159,9 @@ public class Main {
                     }
                 }
                 if (view.getKey().getKeyType() == KeyType.Escape) {
-                    flag = false;
+                    break;
                 }
             }
         }
-
-        view.stopWidows();
     }
 }

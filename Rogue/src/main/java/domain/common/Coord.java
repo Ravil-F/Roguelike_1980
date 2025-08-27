@@ -9,6 +9,18 @@ public class Coord {
         this.y = y;
     }
 
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Coord)) return false;
+        Coord coord = (Coord) obj;
+        return x == coord.x && y == coord.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return 31 * x + y;
+    }
+
     public int getX() {
         return x;
     }

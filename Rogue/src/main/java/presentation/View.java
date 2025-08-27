@@ -6,6 +6,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.input.KeyStroke;
+import domain.enums.Map;
 
 import java.io.IOException;
 
@@ -69,10 +70,19 @@ public class View {
         String tmp = "0";
         for(int x = 0; x < controller.getModel().getMap().getWidth(); ++x){
             for (int y = 0; y < controller.getModel().getMap().getHeight(); ++y){
-                if (!controller.getModel().getMap().getMap(x, y).equals(tmp))
-                    textGraphics.putString(x, y, String.valueOf(controller.getModel().getMap().getMap(x, y)));
+                if (!controller.getModel().getMap().getMap(x, y).equals(tmp)){
+                    textGraphics.putString(x, y, convertIntToString(x, y));
+                }
             }
         }
+    }
+
+    private void viewInfo(){
+        int count  = 2;
+        textGraphics.putString( 2, Map.WIDTH_HEIGHT.getWidth() + count,"Max health: " + controller.getModel().getPlayer().getMaxHealth());
+        textGraphics.putString( 2, Map.WIDTH_HEIGHT.getWidth() + (count + 1),"Health: " + controller.getModel().getPlayer().getHealth());
+        textGraphics.putString( 20, Map.WIDTH_HEIGHT.getWidth() + count,"Agility: " + controller.getModel().getPlayer().getAgility());
+        textGraphics.putString( 20, Map.WIDTH_HEIGHT.getWidth() + (count + 1),"Strength: " + controller.getModel().getPlayer().getStrength());
     }
 
     private void viewGameOver(){
@@ -80,7 +90,7 @@ public class View {
             screen.clear();
             textGraphics.putString(4, 2, "Game Over, " + controller.getModel().getPlayer().getName());
             screen.refresh();
-            Thread.sleep(3000);
+            Thread.sleep(2000);
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
@@ -116,6 +126,7 @@ public class View {
     public void gameLoop() throws IOException {
         try{
             while (true){
+                textGraphics.putString(2, 2, "Hello");
                 screen.clear();
                 setKey();
                 if (key != null){
@@ -126,9 +137,10 @@ public class View {
                     if (key.getKeyType() == KeyType.Character)
                         controller.userInput(key, true);
                     viewMap();
-                    Thread.sleep(1000);
+                    viewInfo();
+                    Thread.sleep(500);
                     screen.refresh();
-
+                    key = null;
                 }
             }
         }catch (Exception e){
@@ -140,5 +152,11 @@ public class View {
         screen.stopScreen();
     }
 
-
+    //convert metod
+    private String convertIntToString(int x, int y){
+        String tmpstr = controller.getModel().getMap().getMap(x, y);
+        int tmpint = Integer.parseInt(tmpstr);
+        char tmpch = (char)tmpint;
+        return String.valueOf(tmpch);
+    }
 }

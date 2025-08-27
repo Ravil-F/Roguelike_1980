@@ -10,7 +10,7 @@ public class Map {
     private int[][] map;
     
     public Map(){
-        map = new int[this.width][this.height];    
+        this.map = new int[this.width][this.height];
     }
 
     public String getMap(int x, int y) {
