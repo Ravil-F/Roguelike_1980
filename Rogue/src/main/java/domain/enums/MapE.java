@@ -1,11 +1,11 @@
 package domain.enums;
 
-public enum Map {
+public enum MapE {
     WIDTH_HEIGHT (20);
 
     private final int wh;
 
-    Map(int wh){
+    MapE(int wh){
         this.wh = wh;
     }
 

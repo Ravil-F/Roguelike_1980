@@ -1,12 +1,14 @@
 package domain.location;
 
+import domain.enums.MapE;
+
 import java.util.List;
 
 public class Map {
     private List<Rooms> room;
     private List<Passage> passages;
-    private final int width = domain.enums.Map.WIDTH_HEIGHT.getWidth();
-    private final int height = domain.enums.Map.WIDTH_HEIGHT.getWidth();
+    private final int width = MapE.WIDTH_HEIGHT.getWidth();
+    private final int height = MapE.WIDTH_HEIGHT.getWidth();
     private int[][] map;
     
     public Map(){

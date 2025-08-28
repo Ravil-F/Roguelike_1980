@@ -38,8 +38,14 @@ public abstract class Entity {
         return coord;
     }
 
-    public void setCoord(int x, int y) {
-        this.coord = coord.add(x, y);
+//    public void setCoord(int x, int y) {
+//        this.coord = coord.add(x, y);
+//    }
+    public void setCoordX(int x){
+        this.coord.setX(x);
+    }
+    public void setCoordY(int y){
+        this.coord.setX(y);
     }
 
     public Entity(String name, char symbol, ColorE color, int x, int y) {

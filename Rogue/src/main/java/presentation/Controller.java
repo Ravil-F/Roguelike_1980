@@ -26,22 +26,21 @@ public class Controller {
                     case 'W':
 //                        y = model.getPlayer().Move(y, false);
 //                        model.getPlayer().setCoord(x, y);
-                        model.movePlayer(StatusE.DOWN.ordinal());
+                        model.movePlayer(StatusE.UP.ordinal());
                         break;
                     case 's':
                     case 'S':
-                        y = model.getPlayer().Move(y, true);
-                        model.getPlayer().setCoord(x, y);
+//                        y = model.getPlayer().Move(y, true);
+//                        model.getPlayer().setCoord(x, y);
+                        model.movePlayer(StatusE.DOWN.ordinal());
                         break;
                     case 'a':
                     case 'A':
-                        x = model.getPlayer().Move(x, false);
-                        model.getPlayer().setCoord(x, y);
+                        model.movePlayer(StatusE.LEFT.ordinal());
                         break;
                     case 'd':
                     case 'D':
-                        x = model.getPlayer().Move(x, true);
-                        model.getPlayer().setCoord(x, y);
+                        model.movePlayer(StatusE.RIGHT.ordinal());
                         break;
                     case '1':
                     case '2':
