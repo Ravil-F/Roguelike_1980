@@ -1,14 +1,19 @@
 package domain.abstact;
 
+import domain.common.Coord;
+
 public abstract class Items {
     private final char symbol;
     private final String name;
     private  final int increase;
+    private Coord coord;
 
-    public Items(char symbol, String name, int increase) {
+    public Items(char symbol, String name, int increase, int x, int y) {
         this.symbol = symbol;
         this.name = name;
         this.increase = increase;
+        this.coord.setX(x);
+        this.coord.setY(y);
     }
 
     public String getName() {
@@ -21,5 +26,9 @@ public abstract class Items {
 
     public char getSymbol() {
         return symbol;
+    }
+
+    public Coord getCoord() {
+        return coord;
     }
 }

@@ -7,6 +7,7 @@ import domain.abstact.Items;
 public class Backpack {
     private List<Items> items;
     private int counter;
+    private final int maxSize = 9;
 
     public Backpack() {
         items = new ArrayList<>();
@@ -42,7 +43,16 @@ public class Backpack {
     }
 
     public void add(Items item){
-        this.items.add(item);
-        ++counter;
+        if (counter < 9) {
+            this.items.add(item);
+            ++counter;
+        }
+    }
+
+    public void remove(int index){
+        if (counter != 0) {
+            this.items.remove(index);
+            --counter;
+        }
     }
 }

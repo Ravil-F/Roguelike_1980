@@ -24,14 +24,10 @@ public class Controller {
                 switch (key.getCharacter()){
                     case 'w':
                     case 'W':
-//                        y = model.getPlayer().Move(y, false);
-//                        model.getPlayer().setCoord(x, y);
                         model.movePlayer(StatusE.UP.ordinal());
                         break;
                     case 's':
                     case 'S':
-//                        y = model.getPlayer().Move(y, true);
-//                        model.getPlayer().setCoord(x, y);
                         model.movePlayer(StatusE.DOWN.ordinal());
                         break;
                     case 'a':

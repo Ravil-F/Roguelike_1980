@@ -1,9 +1,8 @@
 package domain;
 
+import domain.abstact.Items;
 import domain.backpack.Backpack;
-import domain.common.Coord;
 import domain.enums.*;
-import domain.items.Elixir;
 import domain.items.Food;
 import domain.location.Map;
 import domain.player.Player;
@@ -14,23 +13,25 @@ public class Model {
     private List<Player> player;
     private Backpack backpack;
     private Map map;
-    private Food food;
+    private List<Items> items;
+//    private Food food;
 
 
     public Model(){
         player = new LinkedList<Player>();
         player.addFirst(new Player());
+
         backpack = new Backpack();
+        backpack.add(new Food(FoodE.BREAD_F, 5, 6 ));
         map = new Map();
-        food = new Food(FoodE.BREAD_F, 5, 6);
+
     }
 
 
     public void gameSession(){
-//        map.setMap(player.getCoord().getX(), player.getCoord().getY(), player.getSymbol());
         map = new Map();
         map.setMap(player.getFirst().getCoord().getX(), player.getFirst().getCoord().getY(), player.getFirst().getSymbol());
-        map.setMap(food.getCoord().getX(), food.getCoord().getY(), food.getSymbol());
+        map.setMap(backpack.getItems().getCoord().getX(), backpack.getItems().getCoord().getY(), backpack.getItems().getSymbol());
     }
 
     public void passName(String line){
@@ -51,7 +52,7 @@ public class Model {
 
         if (status == StatusE.DOWN.ordinal()){
             ++tmpY;
-            if (tmpY < MapE.WIDTH_HEIGHT.ordinal()) {
+            if (tmpY < MapE.WIDTH_HEIGHT.getWidth()) {
                 checkItems(tmpX, tmpY);
                 addPlayer(tmpX, tmpY);
             }
@@ -67,18 +68,16 @@ public class Model {
 
         if (status == StatusE.RIGHT.ordinal()){
             ++tmpX;
-            if (tmpY < MapE.WIDTH_HEIGHT.ordinal()) {
+            if (tmpY < MapE.WIDTH_HEIGHT.getWidth()) {
                 checkItems(tmpX, tmpY);
                 addPlayer(tmpX, tmpY);
             }
         }
-
-
     }
 
     public void checkItems(int x, int y){
-        if (map.getMap(x, y) == String.valueOf(food.getSymbol())) {
-            player.getFirst().increaseHealth(food.getIncrease());
+        if (map.getMap(x, y) == String.valueOf(backpack.getItems().getSymbol())) {
+            player.getFirst().increaseHealth(backpack.getItems().getIncrease());
             addPlayer(x, y);
         }
     }
@@ -98,18 +97,6 @@ public class Model {
     //get - set metod
     public Player getPlayer() {
         return player.getFirst();
-    }
-
-//    public void setPlayer(Player player) {
-//        this.player.getFirst() = player;
-//    }
-
-    public Backpack getBackpack() {
-        return backpack;
-    }
-
-    public void setBackpack(Backpack backpack) {
-        this.backpack = backpack;
     }
 
     public Map getMap() {
