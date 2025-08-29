@@ -17,8 +17,6 @@ public class Controller {
     }
 
     public void userInput(KeyStroke key, boolean flag){
-        int x = model.getPlayer().getCoord().getX();
-        int y = model.getPlayer().getCoord().getY();
         if(key!= null){
             if(key.getKeyType() == KeyType.Character){
                 switch (key.getCharacter()){
@@ -50,7 +48,6 @@ public class Controller {
             }
         }
         model.gameSession();
-
     }
 
     public void passName(String namePlayer){

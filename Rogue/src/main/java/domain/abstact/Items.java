@@ -12,8 +12,8 @@ public abstract class Items {
         this.symbol = symbol;
         this.name = name;
         this.increase = increase;
-        this.coord.setX(x);
-        this.coord.setY(y);
+        coord = new Coord(x, y);
+//        this.coord.setCoord(x, y);
     }
 
     public String getName() {

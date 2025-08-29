@@ -70,8 +70,8 @@ public class View {
         String tmp = "0";
         for(int x = 0; x < controller.getModel().getMap().getWidth(); ++x){
             for (int y = 0; y < controller.getModel().getMap().getHeight(); ++y){
-                if (!controller.getModel().getMap().getMap(x, y).equals(tmp)){
-                    textGraphics.putString(x, y, convertIntToString(x, y));
+                if (!controller.getModel().getMap().getMap(x, y).equals(tmp) && controller.getModel().getMap().getMapChar(x, y) != '0'){
+                    textGraphics.putString(x, y, controller.getModel().getMap().convertIntToString(x, y));
                 }
             }
         }
@@ -124,9 +124,9 @@ public class View {
     }
 
     public void gameLoop() throws IOException {
+        controller.getModel().gameInitialization();
         try{
             while (true){
-                textGraphics.putString(2, 2, "Hello");
                 screen.clear();
                 setKey();
                 if (key != null){
@@ -138,7 +138,6 @@ public class View {
                         controller.userInput(key, true);
                     viewMap();
                     viewInfo();
-                    Thread.sleep(500);
                     screen.refresh();
                     key = null;
                 }
@@ -152,11 +151,11 @@ public class View {
         screen.stopScreen();
     }
 
-    //convert metod
-    private String convertIntToString(int x, int y){
-        String tmpstr = controller.getModel().getMap().getMap(x, y);
-        int tmpint = Integer.parseInt(tmpstr);
-        char tmpch = (char)tmpint;
-        return String.valueOf(tmpch);
-    }
+//    //convert metod
+//    private String convertIntToString(int x, int y){
+//        String tmpstr = controller.getModel().getMap().getMap(x, y);
+//        int tmpint = Integer.parseInt(tmpstr);
+//        char tmpch = (char)tmpint;
+//        return String.valueOf(tmpch);
+//    }
 }
