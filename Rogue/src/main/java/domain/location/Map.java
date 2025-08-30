@@ -22,13 +22,13 @@ public class Map {
         return String.valueOf(tmpch);
     }
 
-    public void removeItemNull(int x, int y) {
-        if (isWithinBounds(x, y)) {
+    public void putZero(int x, int y) {
+        if (isWithInBounds(x, y)) {
             map[x][y] = '0';
         }
     }
 
-    private boolean isWithinBounds(int x, int y) {
+    private boolean isWithInBounds(int x, int y) {
         return x > 0 && y > 0 && x < MapE.WIDTH_HEIGHT.getWidth() && y < MapE.WIDTH_HEIGHT.getWidth();
     }
 
