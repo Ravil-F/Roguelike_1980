@@ -13,7 +13,6 @@ public abstract class Items {
         this.name = name;
         this.increase = increase;
         coord = new Coord(x, y);
-//        this.coord.setCoord(x, y);
     }
 
     public String getName() {

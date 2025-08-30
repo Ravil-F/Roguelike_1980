@@ -1,7 +1,7 @@
 package domain.enums;
 
 public enum Common {
-    MAX_LEVEL(10);
+    MAX_LEVEL(21);
 
     private final int maxLevel;
 

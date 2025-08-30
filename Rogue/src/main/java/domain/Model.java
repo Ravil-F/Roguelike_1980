@@ -33,7 +33,10 @@ public class Model {
 
     public void gameInitialization(){
         map.setMap(player.getFirst().getCoord().getX(), player.getFirst().getCoord().getY(), player.getFirst().getSymbol());
-        map.setMap(items.getRandomItem().getCoord().getX(), items.getRandomItem().getCoord().getY(), items.getRandomItem().getSymbol());
+
+        for(int i = 0; i < items.getItems().size(); ++i) {
+            map.setMap(items.getItems().get(i).getCoord().getX(), items.getItems().get(i).getCoord().getY(), items.getItems().get(i).getSymbol());
+        }
     }
 
     public void gameSession(){
@@ -87,10 +90,11 @@ public class Model {
 
 
     public boolean checkItems(int x, int y){
-        if(items.getRandomItem() == null) return false;
-        if (map.convertIntToString(x, y).equals(String.valueOf(items.getRandomItem().getSymbol()))) {
-            player.getFirst().increaseHealth(items.getRandomItem().getIncrease());
-            backpack.add(items.getRandomItem());
+        if(items.getItems() == null) return false;
+        if (map.convertIntToString(x, y).equals(String.valueOf(items.getItems().get().getSymbol()))) {
+            player.getFirst().increaseHealth(items.getItems().get().getIncrease());
+            backpack.add(items.getItems().get());
+            backpack.printBackpack();
             map.putZero(x, y);
             map.putZero(player.getFirst().getCoord().getX(), player.getFirst().getCoord().getY());
             addPlayer(x, y);
