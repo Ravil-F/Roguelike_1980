@@ -1,11 +1,11 @@
 package domain.enums;
 
-public enum Common {
+public enum CommonE {
     MAX_LEVEL(21);
 
     private final int maxLevel;
 
-    Common(int maxLevel){
+    CommonE(int maxLevel){
         this.maxLevel = maxLevel;
     }
 

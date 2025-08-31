@@ -2,12 +2,10 @@ package org.example;
 
 import com.googlecode.lanterna.input.KeyType;
 import domain.Model;
-import domain.utils.inputScan;
 import presentation.Controller;
 import presentation.View;
 
 import java.io.IOException;
-import domain.utils.inputScan;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;

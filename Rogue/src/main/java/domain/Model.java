@@ -1,8 +1,7 @@
 package domain;
 
-import domain.abstact.Items;
+import domain.utils.Utils;
 import domain.backpack.Backpack;
-import domain.enums.*;
 import domain.items.GameItems;
 import domain.location.Map;
 import domain.player.Player;
@@ -14,6 +13,7 @@ public class Model {
     private Backpack backpack;
     private Map map;
     private GameItems items;
+    private Utils utils;
 
     public Model(){
         player = new LinkedList<Player>();
@@ -21,6 +21,7 @@ public class Model {
         backpack = new Backpack();
         map = new Map();
         items = new GameItems();
+        utils = new Utils();
     }
 
     public void gameInitialization(){
@@ -70,16 +71,11 @@ public class Model {
     }
 
     private boolean tryMove(int x, int y) {
-        if (isWithinBounds(x, y) && !checkItems(x, y)) {
+        if (utils.isWithinBounds(x, y) && !checkItems(x, y)) {
             return true;
         }
         return false;
     }
-
-    private boolean isWithinBounds(int x, int y) {
-        return x > 0 && y > 0 && x < MapE.WIDTH_HEIGHT.getWidth() && y < MapE.WIDTH_HEIGHT.getWidth();
-    }
-
 
     public boolean checkItems(int x, int y){
         if(items.getItems() == null) return false;

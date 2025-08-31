@@ -2,6 +2,7 @@ package domain.items;
 
 import domain.abstact.Items;
 import domain.enums.*;
+import domain.utils.Utils;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -10,38 +11,47 @@ import java.util.Random;
 public class GameItems {
     private List<Items> items;
     private Random random;
+    private Utils utils;
     private final int countItems = 4;
 
     public GameItems(){
         items = new LinkedList<Items>();
         random = new Random();
+        utils = new Utils();
         generateRandomItems();
     }
 
     private void generateRandomItems() {
-        int tmp = Common.MAX_LEVEL.getMaxLevel();
+        int tmp = CommonE.MAX_LEVEL.getMaxLevel();
         int tmpXY = MapE.WIDTH_HEIGHT.getWidth();
         for (int i = 0; i < tmp - 15; i++) {
-            int countRandom = random.nextInt(4);
+            int countRandom = random.nextInt(countItems);
             switch (countRandom){
                 case 0:
                     ElixirE randomElixir = ElixirE.values()[random.nextInt(ElixirE.values().length)];
-                    items.add(new Elixir(randomElixir, 60, random.nextInt((tmpXY - 1) + 1 ), random.nextInt((tmpXY - 1) + 1)));
+                    items.add(new Elixir(randomElixir, 60, randomXY(tmpXY), randomXY(tmpXY)));
                     break;
                 case 1:
                     FoodE randomFood = FoodE.values()[random.nextInt(FoodE.values().length)];
-                    items.add(new Food(randomFood, random.nextInt((tmpXY - 1) + 1), random.nextInt((tmpXY - 1) + 1)));
+                    items.add(new Food(randomFood, randomXY(tmpXY), randomXY(tmpXY)));
                     break;
                 case 2:
                     ScrollE randomScroll = ScrollE.values()[random.nextInt(ScrollE.values().length)];
-                    items.add(new Scroll(randomScroll, random.nextInt((tmpXY - 1) + 1), random.nextInt((tmpXY - 1) + 1)));
+                    items.add(new Scroll(randomScroll, randomXY(tmpXY), randomXY(tmpXY)));
                     break;
                 case 3:
                     WeaponE randomWeapon = WeaponE.values()[random.nextInt(WeaponE.values().length)];
-                    items.add(new Weapon(randomWeapon, random.nextInt((tmpXY - 1) + 1), random.nextInt((tmpXY - 1) + 1)));
+                    items.add(new Weapon(randomWeapon, randomXY(tmpXY), randomXY(tmpXY)));
                     break;
             }
         }
+    }
+
+    private int randomXY(int xy){
+        int tmp =  random.nextInt(xy);
+        if (utils.isWithinBounds(tmp))
+            return tmp;
+        else return randomXY(xy);
     }
 
     public List<Items> getItems() {
