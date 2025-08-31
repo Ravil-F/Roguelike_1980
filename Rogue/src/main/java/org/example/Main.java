@@ -76,7 +76,8 @@ public class Main {
                         case '1':
                             view.getScreen().refresh();
                             String namePlayer = view.inputScan();
-                            view.passName(namePlayer);
+                            if (namePlayer.equals(" "))
+                                view.passName(namePlayer);
                             view.gameLoop();
                             break;
                         case '2':

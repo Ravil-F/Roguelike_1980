@@ -59,8 +59,8 @@ public class Backpack {
     public void printBackpack(){
         for(Items i : items) {
             System.out.println("Name: " + i.getName() +
-                    "Symbol: " + i.getSymbol() +
-                    "increase: " + i.getIncrease());
+                    " Symbol: " + i.getSymbol() +
+                    " increase: " + i.getIncrease());
         }
     }
 }

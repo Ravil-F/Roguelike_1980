@@ -3,8 +3,6 @@ package domain;
 import domain.abstact.Items;
 import domain.backpack.Backpack;
 import domain.enums.*;
-import domain.items.Elixir;
-import domain.items.Food;
 import domain.items.GameItems;
 import domain.location.Map;
 import domain.player.Player;
@@ -16,18 +14,12 @@ public class Model {
     private Backpack backpack;
     private Map map;
     private GameItems items;
-//    private List<Items> items;
-//    private Food food;
-
 
     public Model(){
         player = new LinkedList<Player>();
         player.addFirst(new Player());
-
         backpack = new Backpack();
-        backpack.add(new Food(FoodE.BREAD_F, 5, 6 ));
         map = new Map();
-
         items = new GameItems();
     }
 
@@ -91,9 +83,10 @@ public class Model {
 
     public boolean checkItems(int x, int y){
         if(items.getItems() == null) return false;
-        if (map.convertIntToString(x, y).equals(String.valueOf(items.getItems().get().getSymbol()))) {
-            player.getFirst().increaseHealth(items.getItems().get().getIncrease());
-            backpack.add(items.getItems().get());
+        int index = equalsMapItems(x, y, items);
+        if (index != -1) {
+            System.out.println("items: " + items.getItems().get(index));
+            backpack.add(items.getItems().get(index));
             backpack.printBackpack();
             map.putZero(x, y);
             map.putZero(player.getFirst().getCoord().getX(), player.getFirst().getCoord().getY());
@@ -113,6 +106,14 @@ public class Model {
                 player.getFirst().getStrength(),
                 x, y));
         player.removeLast();
+    }
+
+    private int equalsMapItems(int x, int y, GameItems items){
+        for(int i = 0; i < items.getItems().size(); i++){
+            if (map.convertIntToString(x, y).equals(String.valueOf(items.getItems().get(i).getSymbol())))
+                return i;
+        }
+        return -1;
     }
 
     //get - set metod
