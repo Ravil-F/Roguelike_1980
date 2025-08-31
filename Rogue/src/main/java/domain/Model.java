@@ -1,6 +1,6 @@
 package domain;
 
-import domain.utils.Utils;
+import domain.utils.Utilstmp;
 import domain.backpack.Backpack;
 import domain.items.GameItems;
 import domain.location.Map;
@@ -13,7 +13,7 @@ public class Model {
     private Backpack backpack;
     private Map map;
     private GameItems items;
-    private Utils utils;
+    private Utilstmp utils;
 
     public Model(){
         player = new LinkedList<Player>();
@@ -21,7 +21,7 @@ public class Model {
         backpack = new Backpack();
         map = new Map();
         items = new GameItems();
-        utils = new Utils();
+        utils = new Utilstmp();
     }
 
     public void gameInitialization(){
@@ -71,7 +71,7 @@ public class Model {
     }
 
     private boolean tryMove(int x, int y) {
-        if (utils.isWithinBounds(x, y) && !checkItems(x, y)) {
+        if (map.isWithInBounds(x, y) && !checkItems(x, y)) {
             return true;
         }
         return false;
@@ -81,9 +81,9 @@ public class Model {
         if(items.getItems() == null) return false;
         int index = equalsMapItems(x, y, items);
         if (index != -1) {
-            System.out.println("items: " + items.getItems().get(index));
             backpack.add(items.getItems().get(index));
             backpack.printBackpack();
+            System.out.println("-----------------------------------");
             map.putZero(x, y);
             map.putZero(player.getFirst().getCoord().getX(), player.getFirst().getCoord().getY());
             addPlayer(x, y);

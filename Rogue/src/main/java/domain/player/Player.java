@@ -3,9 +3,8 @@ package domain.player;
 import domain.abstact.Attributes;
 
 import domain.enums.ColorE;
-import domain.interfaces.Move;
 
-public class Player extends Attributes implements Move {
+public class Player extends Attributes {
 
     public Player() {
         super("Player", '@', ColorE.RED, 100, 100, 0, 0, 5, 5);
@@ -13,13 +12,6 @@ public class Player extends Attributes implements Move {
 
     public Player(String name, char symbol, ColorE color, int maxHealth, int health, int agility, int strength, int x, int y) {
         super(name, symbol, color, maxHealth, health, agility, strength, x, y);
-    }
-
-    @Override
-    public int Move(int a, boolean bol) {
-        if (bol) {
-            return ++a;
-        } else return --a;
     }
 
     public void increaseHealth(int a){

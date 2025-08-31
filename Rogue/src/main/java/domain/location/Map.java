@@ -1,10 +1,11 @@
 package domain.location;
 
 import domain.enums.MapE;
+import domain.interfaces.Utils;
 
 import java.util.List;
 
-public class Map {
+public class Map implements Utils {
     private List<Rooms> room;
     private List<Passage> passages;
     private final int width = MapE.WIDTH_HEIGHT.getWidth();
@@ -28,10 +29,6 @@ public class Map {
         }
     }
 
-    private boolean isWithInBounds(int x, int y) {
-        return x > 0 && y > 0 && x < MapE.WIDTH_HEIGHT.getWidth() && y < MapE.WIDTH_HEIGHT.getWidth();
-    }
-
     public String getMap(int x, int y) {
         return String.valueOf(map[x][y]);
     }
@@ -50,5 +47,16 @@ public class Map {
 
     public int getHeight() {
         return height;
+    }
+
+
+    @Override
+    public boolean isWithInBounds(int x) {
+        return false;
+    }
+
+    @Override
+    public boolean isWithInBounds(int x, int y) {
+        return x > 0 && y > 0 && x < MapE.WIDTH_HEIGHT.getWidth() && y < MapE.WIDTH_HEIGHT.getWidth();
     }
 }

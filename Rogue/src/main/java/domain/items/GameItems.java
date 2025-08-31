@@ -2,22 +2,20 @@ package domain.items;
 
 import domain.abstact.Items;
 import domain.enums.*;
-import domain.utils.Utils;
+import domain.interfaces.Utils;
 
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-public class GameItems {
+public class GameItems implements Utils {
     private List<Items> items;
     private Random random;
-    private Utils utils;
     private final int countItems = 4;
 
     public GameItems(){
         items = new LinkedList<Items>();
         random = new Random();
-        utils = new Utils();
         generateRandomItems();
     }
 
@@ -49,7 +47,7 @@ public class GameItems {
 
     private int randomXY(int xy){
         int tmp =  random.nextInt(xy);
-        if (utils.isWithinBounds(tmp))
+        if (isWithInBounds(tmp))
             return tmp;
         else return randomXY(xy);
     }
@@ -60,5 +58,15 @@ public class GameItems {
 
     public void setItems(List<Items> items) {
         this.items = items;
+    }
+
+    @Override
+    public boolean isWithInBounds(int x) {
+        return x > 0 && x < MapE.WIDTH_HEIGHT.getWidth();
+    }
+
+    @Override
+    public boolean isWithInBounds(int x, int y) {
+        return false;
     }
 }

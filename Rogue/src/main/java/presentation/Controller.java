@@ -36,8 +36,20 @@ public class Controller {
                     case 'D':
                         model.movePlayer(StatusE.RIGHT.ordinal());
                         break;
-                    case '1':
-                    case '2':
+                    case 'h':
+                    case 'H':
+                        System.out.println("world");
+                        break;
+                    case 'j':
+                    case 'J':
+                        System.out.println("world");
+                        break;
+                    case 'k':
+                    case 'K':
+                        System.out.println("world");
+                        break;
+                    case 'e':
+                    case 'E':
                         System.out.println("world");
                         break;
                     default:
