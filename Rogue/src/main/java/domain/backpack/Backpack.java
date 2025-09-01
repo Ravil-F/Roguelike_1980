@@ -18,6 +18,10 @@ public class Backpack {
         return items.get(index);
     }
 
+    public int getItemsSize(){
+        return items.size();
+    }
+
     public String getItemsName(){
         return items.get(0).getName();
     }

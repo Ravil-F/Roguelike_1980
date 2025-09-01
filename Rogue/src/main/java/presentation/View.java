@@ -97,14 +97,17 @@ public class View {
     }
 
     private void viewSingleItemtype() throws IOException {
-        screen.clear();
+//        screen.clear();
+        System.out.println("Hello======================================");
+        int tmpX = MapE.WIDTH_HEIGHT.getWidth();
+        if (controller.getModel().getSingleItemType().isEmpty())
+            textGraphics.putString(2, 2, "Not Items in Backpack");
         for(int i = 0; i < controller.getModel().getSingleItemType().size(); ++i){
-            textGraphics.putString(MapE.WIDTH_HEIGHT.getWidth() + i + 2, 2,  " ." + i +
-                    "name:  " + controller.getModel().getSingleItemType().get(i).getName() +
-                    " increase: " + controller.getModel().getSingleItemType().get(i).getIncrease());
-
+            textGraphics.putString(tmpX + 4, 2 + i,+ i + "." +
+                    " name-" + controller.getModel().getSingleItemType().get(i).getName() +
+                    " increase-" + controller.getModel().getSingleItemType().get(i).getIncrease());
         }
-        screen.refresh();
+//        screen.refresh();
     }
     // END VIEW WINDOWS
 
@@ -145,13 +148,15 @@ public class View {
                         viewGameOver();
                         break;
                     }
-                    if (key.getKeyType() == KeyType.Character)
+                    if (key.getKeyType() == KeyType.Character) {
                         controller.userInput(key, true);
+                        char tmp = Character.toLowerCase(key.getCharacter());
+                        if (tmp == 'h')
+                            viewSingleItemtype();
+                    }
                     viewMap();
                     viewInfo();
-                    if (key.getKeyType() == KeyType.Character)
-                        if (Character.toLowerCase(key.getCharacter()) == 'h')
-                            viewSingleItemtype();
+
                     screen.refresh();
                     key = null;
                 }

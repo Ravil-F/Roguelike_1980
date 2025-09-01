@@ -113,11 +113,13 @@ public class Model {
     }
 
     public void openBackpack(final char symbol){
-        for(int i = 0; i < backpack.getMaxSize(); ++i){
+        for(int i = 0; i < backpack.getItemsSize(); ++i){
             if (backpack.getItems(i).getSymbol() == symbol){
                 singleItemType.add(backpack.getItems(i));
+                System.out.println("singleItemType: " + singleItemType.get(i));
             }
         }
+
     }
 
     //get - set metod

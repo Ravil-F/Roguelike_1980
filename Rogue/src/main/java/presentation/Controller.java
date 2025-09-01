@@ -21,6 +21,7 @@ public class Controller {
             if(key.getKeyType() == KeyType.Character){
                 switch (Character.toLowerCase(key.getCharacter())){
                     case 'w':
+
                         model.movePlayer(StatusE.UP.ordinal());
                         break;
                     case 's':
@@ -33,7 +34,7 @@ public class Controller {
                         model.movePlayer(StatusE.RIGHT.ordinal());
                         break;
                     case 'h':
-                        model.openBackpack('H');
+                        model.openBackpack('w');
                         break;
                     case 'j':
                         System.out.println("world");
