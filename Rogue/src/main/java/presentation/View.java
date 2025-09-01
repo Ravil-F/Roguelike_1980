@@ -95,6 +95,17 @@ public class View {
             System.out.println(e.getMessage());
         }
     }
+
+    private void viewSingleItemtype() throws IOException {
+        screen.clear();
+        for(int i = 0; i < controller.getModel().getSingleItemType().size(); ++i){
+            textGraphics.putString(MapE.WIDTH_HEIGHT.getWidth() + i + 2, 2,  " ." + i +
+                    "name:  " + controller.getModel().getSingleItemType().get(i).getName() +
+                    " increase: " + controller.getModel().getSingleItemType().get(i).getIncrease());
+
+        }
+        screen.refresh();
+    }
     // END VIEW WINDOWS
 
 
@@ -138,6 +149,9 @@ public class View {
                         controller.userInput(key, true);
                     viewMap();
                     viewInfo();
+                    if (key.getKeyType() == KeyType.Character)
+                        if (Character.toLowerCase(key.getCharacter()) == 'h')
+                            viewSingleItemtype();
                     screen.refresh();
                     key = null;
                 }
@@ -151,11 +165,4 @@ public class View {
         screen.stopScreen();
     }
 
-//    //convert metod
-//    private String convertIntToString(int x, int y){
-//        String tmpstr = controller.getModel().getMap().getMap(x, y);
-//        int tmpint = Integer.parseInt(tmpstr);
-//        char tmpch = (char)tmpint;
-//        return String.valueOf(tmpch);
-//    }
 }

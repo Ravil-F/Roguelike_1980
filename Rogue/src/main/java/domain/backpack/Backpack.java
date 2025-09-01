@@ -14,8 +14,8 @@ public class Backpack {
         this.counter = 0;
     }
 
-    public Items getItems(){
-        return items.get(0);
+    public Items getItems(int index){
+        return items.get(index);
     }
 
     public String getItemsName(){
@@ -43,7 +43,7 @@ public class Backpack {
     }
 
     public void add(Items item){
-        if (counter < 9) {
+        if (counter < maxSize) {
             this.items.add(item);
             ++counter;
         }
@@ -62,5 +62,9 @@ public class Backpack {
                     " Symbol: " + i.getSymbol() +
                     " increase: " + i.getIncrease());
         }
+    }
+
+    public int getMaxSize() {
+        return maxSize;
     }
 }

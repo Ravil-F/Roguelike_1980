@@ -1,6 +1,6 @@
 package domain;
 
-import domain.utils.Utilstmp;
+import domain.abstact.Items;
 import domain.backpack.Backpack;
 import domain.items.GameItems;
 import domain.location.Map;
@@ -13,7 +13,7 @@ public class Model {
     private Backpack backpack;
     private Map map;
     private GameItems items;
-    private Utilstmp utils;
+    private List<Items> singleItemType;
 
     public Model(){
         player = new LinkedList<Player>();
@@ -21,7 +21,7 @@ public class Model {
         backpack = new Backpack();
         map = new Map();
         items = new GameItems();
-        utils = new Utilstmp();
+        singleItemType = new LinkedList<>();
     }
 
     public void gameInitialization(){
@@ -112,6 +112,14 @@ public class Model {
         return -1;
     }
 
+    public void openBackpack(final char symbol){
+        for(int i = 0; i < backpack.getMaxSize(); ++i){
+            if (backpack.getItems(i).getSymbol() == symbol){
+                singleItemType.add(backpack.getItems(i));
+            }
+        }
+    }
+
     //get - set metod
     public Player getPlayer() {
         return player.getFirst();
@@ -125,4 +133,7 @@ public class Model {
         this.map = map;
     }
 
+    public List<Items> getSingleItemType() {
+        return singleItemType;
+    }
 }

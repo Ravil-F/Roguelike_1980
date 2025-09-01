@@ -19,37 +19,29 @@ public class Controller {
     public void userInput(KeyStroke key, boolean flag){
         if(key!= null){
             if(key.getKeyType() == KeyType.Character){
-                switch (key.getCharacter()){
+                switch (Character.toLowerCase(key.getCharacter())){
                     case 'w':
-                    case 'W':
                         model.movePlayer(StatusE.UP.ordinal());
                         break;
                     case 's':
-                    case 'S':
                         model.movePlayer(StatusE.DOWN.ordinal());
                         break;
                     case 'a':
-                    case 'A':
                         model.movePlayer(StatusE.LEFT.ordinal());
                         break;
                     case 'd':
-                    case 'D':
                         model.movePlayer(StatusE.RIGHT.ordinal());
                         break;
                     case 'h':
-                    case 'H':
-                        System.out.println("world");
+                        model.openBackpack('H');
                         break;
                     case 'j':
-                    case 'J':
                         System.out.println("world");
                         break;
                     case 'k':
-                    case 'K':
                         System.out.println("world");
                         break;
                     case 'e':
-                    case 'E':
                         System.out.println("world");
                         break;
                     default:
