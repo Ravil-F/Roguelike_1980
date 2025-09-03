@@ -9,6 +9,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 import domain.enums.MapE;
 
 import java.io.IOException;
+import java.security.Key;
 
 
 public class View {
@@ -97,7 +98,6 @@ public class View {
     }
 
     private void viewSingleItemtype() throws IOException {
-//        screen.clear();
         System.out.println("Hello======================================");
         int tmpX = MapE.WIDTH_HEIGHT.getWidth();
         if (controller.getModel().getSingleItemType().isEmpty())
@@ -107,7 +107,7 @@ public class View {
                     " name-" + controller.getModel().getSingleItemType().get(i).getName() +
                     " increase-" + controller.getModel().getSingleItemType().get(i).getIncrease());
         }
-//        screen.refresh();
+        screen.refresh();
     }
     // END VIEW WINDOWS
 
@@ -150,19 +150,45 @@ public class View {
                     }
                     if (key.getKeyType() == KeyType.Character) {
                         controller.userInput(key, true);
-                        char tmp = Character.toLowerCase(key.getCharacter());
-                        if (tmp == 'h')
-                            viewSingleItemtype();
                     }
-                    viewMap();
-                    viewInfo();
-
+                    viewGame(key);
                     screen.refresh();
                     key = null;
                 }
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
+        }
+    }
+
+    private void viewGame(KeyStroke key) throws IOException {
+        viewController(key);
+        viewMap();
+        viewInfo();
+    }
+
+    private void viewController(KeyStroke key) throws IOException {
+        char tmp = Character.toLowerCase(key.getCharacter());
+        if (tmp == 'h') {
+            viewSingleItemtype();
+//            screen.clear();
+            key = null;
+            setKey();
+            if (key != null){
+                if(key.getKeyType() == KeyType.Escape)
+                    return;
+                if(key.getKeyType() == KeyType.Character){
+//                    char tmpInt = Character.toLowerCase(key.getCharacter());
+                    System.out.println("tmpInt: ");
+//                    try {
+//                        int index = tmpInt - 'a';
+//                        System.out.println("index: " + index);
+                        controller.userInputBackpack(key);
+//                    }catch (NumberFormatException e){
+//                        textGraphics.putString(MapE.WIDTH_HEIGHT.getWidth() + 4, 15, e.getMessage());
+//                    }
+                }
+            }
         }
     }
 

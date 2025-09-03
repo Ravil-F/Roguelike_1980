@@ -77,7 +77,7 @@ public class Model {
         return false;
     }
 
-    public boolean checkItems(int x, int y){
+    private boolean checkItems(int x, int y){
         if(items.getItems() == null) return false;
         int index = equalsMapItems(x, y, items);
         if (index != -1) {
@@ -137,5 +137,9 @@ public class Model {
 
     public List<Items> getSingleItemType() {
         return singleItemType;
+    }
+
+    public Backpack getBackpack() {
+        return backpack;
     }
 }

@@ -3,6 +3,7 @@ package presentation;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import domain.Model;
+import domain.abstact.Items;
 import domain.enums.StatusE;
 
 import java.io.ObjectInputFilter;
@@ -21,7 +22,6 @@ public class Controller {
             if(key.getKeyType() == KeyType.Character){
                 switch (Character.toLowerCase(key.getCharacter())){
                     case 'w':
-
                         model.movePlayer(StatusE.UP.ordinal());
                         break;
                     case 's':
@@ -53,6 +53,21 @@ public class Controller {
             }
         }
         model.gameSession();
+    }
+
+    public void userInputBackpack(KeyStroke index){
+        if (key != null){
+            if (key.getKeyType() == KeyType.Character){
+                switch (Character.toLowerCase(key.getCharacter())){
+                    case '0':
+                        System.out.println("hekk");
+                        break;
+                }
+            }
+        }
+//        model.getPlayer().setStrength(model.getSingleItemType().get(index).getIncrease());
+//        model.getSingleItemType().remove(index);
+//        model.getBackpack().getItems().sort();
     }
 
     public void passName(String namePlayer){
