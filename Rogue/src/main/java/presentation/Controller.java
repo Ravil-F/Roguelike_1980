@@ -55,9 +55,10 @@ public class Controller {
         model.gameSession();
     }
 
-    public void userInputBackpack(KeyStroke index){
+    public void userInputBackpack(KeyStroke key){
         if (key != null){
             if (key.getKeyType() == KeyType.Character){
+                System.out.println("key: " + key.getCharacter());
                 switch (Character.toLowerCase(key.getCharacter())){
                     case '0':
                         System.out.println("hekk");

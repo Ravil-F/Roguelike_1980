@@ -119,7 +119,8 @@ public class View {
 
     public void setKey() throws IOException {
         KeyStroke tmp = screen.pollInput();
-        if (tmp != null)
+        System.out.println("tmp key: " + tmp);
+        if(tmp != null)
             this.key = tmp;
     }
 
@@ -150,10 +151,11 @@ public class View {
                     }
                     if (key.getKeyType() == KeyType.Character) {
                         controller.userInput(key, true);
+                        viewGame(key);
                     }
-                    viewGame(key);
+//                    Thread.sleep(500);
                     screen.refresh();
-                    key = null;
+//                    key = null;
                 }
             }
         }catch (Exception e){
@@ -168,25 +170,15 @@ public class View {
     }
 
     private void viewController(KeyStroke key) throws IOException {
-        char tmp = Character.toLowerCase(key.getCharacter());
-        if (tmp == 'h') {
+        if (Character.toLowerCase(key.getCharacter()) == 'h') {
             viewSingleItemtype();
-//            screen.clear();
-            key = null;
             setKey();
             if (key != null){
                 if(key.getKeyType() == KeyType.Escape)
                     return;
                 if(key.getKeyType() == KeyType.Character){
-//                    char tmpInt = Character.toLowerCase(key.getCharacter());
                     System.out.println("tmpInt: ");
-//                    try {
-//                        int index = tmpInt - 'a';
-//                        System.out.println("index: " + index);
-                        controller.userInputBackpack(key);
-//                    }catch (NumberFormatException e){
-//                        textGraphics.putString(MapE.WIDTH_HEIGHT.getWidth() + 4, 15, e.getMessage());
-//                    }
+                    controller.userInputBackpack(key);
                 }
             }
         }
