@@ -49,7 +49,7 @@ import static java.lang.Math.min;
 //        }
 //    }
 //}
-
+    
 public class Main {
     public static void main(String[] args) throws IOException {
         startGame();

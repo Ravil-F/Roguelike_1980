@@ -98,8 +98,8 @@ public class View {
     }
 
     private void viewSingleItemtype() throws IOException {
-        System.out.println("Hello======================================");
         int tmpX = MapE.WIDTH_HEIGHT.getWidth();
+        textGraphics.putString(tmpX + 2, 1, "Enter number items (0-8), Escape - exit");
         if (controller.getModel().getSingleItemType().isEmpty())
             textGraphics.putString(2, 2, "Not Items in Backpack");
         for(int i = 0; i < controller.getModel().getSingleItemType().size(); ++i){
@@ -143,7 +143,6 @@ public class View {
 
             while (true){
                 screen.clear();
-                setKey();
                 if (this.key != null){
                     if (this.key.getKeyType() == KeyType.Escape){
                         viewGameOver();
@@ -159,6 +158,7 @@ public class View {
                     viewInfo();
                     screen.refresh();
                     this.key = null;
+                    setKey();
                 }
             }
 
@@ -180,14 +180,15 @@ public class View {
             setKey();
 
             while (this.key != null){
-                setKey();
                 if(this.key.getKeyType() == KeyType.Escape)
                     return;
 
                 if(this.key != null && this.key.getKeyType() == KeyType.Character){
-                    System.out.println("tmpInt: " + this.key);
+//                    System.out.println("tmpInt: " + this.key);
                     controller.userInputBackpack(this.key);
+                    return;
                 }
+                setKey();
             }
 
         }

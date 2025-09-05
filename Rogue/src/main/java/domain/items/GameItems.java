@@ -23,22 +23,22 @@ public class GameItems implements Utils {
         int tmp = CommonE.MAX_LEVEL.getMaxLevel();
         int tmpXY = MapE.WIDTH_HEIGHT.getWidth();
         for (int i = 0; i < tmp - 15; i++) {
-            int countRandom = random.nextInt(countItems);
+            int countRandom = random.nextInt(0, countItems);
             switch (countRandom){
                 case 0:
-                    ElixirE randomElixir = ElixirE.values()[random.nextInt(ElixirE.values().length)];
+                    ElixirE randomElixir = ElixirE.values()[random.nextInt(0, ElixirE.values().length)];
                     items.add(new Elixir(randomElixir, 60, randomXY(tmpXY), randomXY(tmpXY)));
                     break;
                 case 1:
-                    FoodE randomFood = FoodE.values()[random.nextInt(FoodE.values().length)];
+                    FoodE randomFood = FoodE.values()[random.nextInt(0, FoodE.values().length)];
                     items.add(new Food(randomFood, randomXY(tmpXY), randomXY(tmpXY)));
                     break;
                 case 2:
-                    ScrollE randomScroll = ScrollE.values()[random.nextInt(ScrollE.values().length)];
+                    ScrollE randomScroll = ScrollE.values()[random.nextInt(0, ScrollE.values().length)];
                     items.add(new Scroll(randomScroll, randomXY(tmpXY), randomXY(tmpXY)));
                     break;
                 case 3:
-                    WeaponE randomWeapon = WeaponE.values()[random.nextInt(WeaponE.values().length)];
+                    WeaponE randomWeapon = WeaponE.values()[random.nextInt(0, WeaponE.values().length)];
                     items.add(new Weapon(randomWeapon, randomXY(tmpXY), randomXY(tmpXY)));
                     break;
             }

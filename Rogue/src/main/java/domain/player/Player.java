@@ -14,8 +14,10 @@ public class Player extends Attributes {
         super(name, symbol, color, maxHealth, health, agility, strength, x, y);
     }
 
-    public void increaseStrenght(int hp){
-        setStrength(hp);
+    public void increaseStrenght(int xp){
+        int res = getStrength() + xp;
+        System.out.println("res: " + res);
+        setStrength(res);
     }
 
     public void increaseHealth(int a){

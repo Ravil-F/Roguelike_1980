@@ -67,8 +67,7 @@ public class Controller {
                 }
             }
         }
-//        model.getPlayer().setStrength(model.getSingleItemType().get(index).getIncrease());
-//        model.getSingleItemType().remove(index);
+        model.getBackpack().getItems().remove(Character.getNumericValue(key.getCharacter()));
 //        model.getBackpack().getItems().sort();
     }
 
