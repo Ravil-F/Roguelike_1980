@@ -62,6 +62,7 @@ public class Controller {
                 switch (key.getCharacter()){
                     case '0':
                         System.out.println("hekk");
+                        model.getPlayer().setStrength(model.getSingleItemType().get(Character.getNumericValue(key.getCharacter())).getIncrease());
                         break;
                 }
             }

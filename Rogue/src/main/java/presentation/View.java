@@ -140,51 +140,56 @@ public class View {
     public void gameLoop() throws IOException {
         controller.getModel().gameInitialization();
         try{
+
             while (true){
                 screen.clear();
                 setKey();
-                if (key != null){
-                    if (key.getKeyType() == KeyType.Escape){
+                if (this.key != null){
+                    if (this.key.getKeyType() == KeyType.Escape){
                         viewGameOver();
                         break;
                     }
-                    if (key.getKeyType() == KeyType.Character) {
-                        controller.userInput(key, true);
-                        viewGame(key);
+
+                    if (this.key.getKeyType() == KeyType.Character) {
+                        controller.userInput(this.key, true);
+                        viewController();
                     }
+
                     viewMap();
                     viewInfo();
                     screen.refresh();
-                    key = null;
+                    this.key = null;
                 }
             }
+
         }catch (Exception e){
             System.out.println(e.getMessage());
         }
     }
 
-    private void viewGame(KeyStroke key) throws IOException {
-        viewController(key);
-//        viewMap();
-//        viewInfo();
-//        screen.refresh();
-    }
+//    private void viewGame() throws IOException {
+//        viewController();
+////        viewMap();
+////        viewInfo();
+////        screen.refresh();
+//    }
 
-    private void viewController(KeyStroke key) throws IOException {
-        if (Character.toLowerCase(key.getCharacter()) == 'h') {
+    private void viewController() throws IOException {
+        if (Character.toLowerCase(this.key.getCharacter()) == 'h') {
             viewSingleItemtype();
-            key = null;
             setKey();
-            while (key != null){
-                if(key.getKeyType() == KeyType.Escape)
-                    return;
+
+            while (this.key != null){
                 setKey();
-                if(key != null && key.getKeyType() == KeyType.Character){
-                    System.out.println("tmpInt: ");
-                    controller.userInputBackpack(key);
+                if(this.key.getKeyType() == KeyType.Escape)
+                    return;
+
+                if(this.key != null && this.key.getKeyType() == KeyType.Character){
+                    System.out.println("tmpInt: " + this.key);
+                    controller.userInputBackpack(this.key);
                 }
-                key = null;
             }
+
         }
     }
 

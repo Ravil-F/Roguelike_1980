@@ -117,7 +117,6 @@ public class Model {
         for(int i = 0; i < backpack.getItemsSize(); ++i){
             if (backpack.getItems(i).getSymbol() == symbol){
                 singleItemType.add(backpack.getItems(i));
-                System.out.println("singleItemType: " + singleItemType.get(i));
             }
         }
 
