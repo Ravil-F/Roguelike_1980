@@ -18,9 +18,9 @@ public class Controller {
     }
 
     public void userInput(KeyStroke key, boolean flag){
-        if(key!= null){
-            if(key.getKeyType() == KeyType.Character){
-                switch (Character.toLowerCase(key.getCharacter())){
+        if (key != null) {
+            if (key.getKeyType() == KeyType.Character) {
+                switch (Character.toLowerCase(key.getCharacter())) {
                     case 'w':
                         model.movePlayer(StatusE.UP.ordinal());
                         break;
@@ -59,7 +59,7 @@ public class Controller {
         if (key != null){
             if (key.getKeyType() == KeyType.Character){
                 System.out.println("key: " + key.getCharacter());
-                switch (Character.toLowerCase(key.getCharacter())){
+                switch (key.getCharacter()){
                     case '0':
                         System.out.println("hekk");
                         break;

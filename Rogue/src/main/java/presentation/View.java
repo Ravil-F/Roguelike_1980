@@ -55,7 +55,7 @@ public class View {
         textGraphics.putString(4, 2, "Enter name Player:");
         screen.refresh();
         do{
-            key = screen.readInput();
+            setKey();
             if((key.getCharacter() != ' ') && (key.getKeyType() == KeyType.Enter))
                 break;
             symbol = key.getCharacter();
@@ -118,13 +118,12 @@ public class View {
     }
 
     public void setKey() throws IOException {
-        KeyStroke tmp = screen.pollInput();
-        System.out.println("tmp key: " + tmp);
+        KeyStroke tmp = screen.readInput();
         if(tmp != null)
             this.key = tmp;
     }
 
-        public TerminalScreen getScreen() {
+    public TerminalScreen getScreen() {
         return screen;
     }
 
@@ -153,9 +152,10 @@ public class View {
                         controller.userInput(key, true);
                         viewGame(key);
                     }
-//                    Thread.sleep(500);
+                    viewMap();
+                    viewInfo();
                     screen.refresh();
-//                    key = null;
+                    key = null;
                 }
             }
         }catch (Exception e){
@@ -165,21 +165,25 @@ public class View {
 
     private void viewGame(KeyStroke key) throws IOException {
         viewController(key);
-        viewMap();
-        viewInfo();
+//        viewMap();
+//        viewInfo();
+//        screen.refresh();
     }
 
     private void viewController(KeyStroke key) throws IOException {
         if (Character.toLowerCase(key.getCharacter()) == 'h') {
             viewSingleItemtype();
+            key = null;
             setKey();
-            if (key != null){
+            while (key != null){
                 if(key.getKeyType() == KeyType.Escape)
                     return;
-                if(key.getKeyType() == KeyType.Character){
+                setKey();
+                if(key != null && key.getKeyType() == KeyType.Character){
                     System.out.println("tmpInt: ");
                     controller.userInputBackpack(key);
                 }
+                key = null;
             }
         }
     }
