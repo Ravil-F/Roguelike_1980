@@ -9,21 +9,21 @@ import presentation.View;
 import java.io.IOException;
     
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         startGame();
     }
 
-    private static void startGame() throws IOException {
+    private static void startGame() throws IOException, InterruptedException {
         Model model = new Model();
         Controller controller = new Controller(model);
         View view = new View(controller);
 
         view.startWindow();
-        startGameLoop(view, controller, model);
+        startGameLoop(view, controller);
         view.stopWidows();
     }
 
-    private static void startGameLoop(View view, Controller controller, Model model) throws IOException{
+    private static void startGameLoop(View view, Controller controller) throws IOException, InterruptedException {
         while (controller.getModel().getPlayer().getStatus() != StatusPlayer.OVER) {
             view.setKey();
             if (view.getKey() != null) {

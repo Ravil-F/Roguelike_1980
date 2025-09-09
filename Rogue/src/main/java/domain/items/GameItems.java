@@ -24,10 +24,10 @@ public class GameItems implements Utils {
     }
 
     public void generateRandomItems(int level) {
-        int maxLevel = common.getMaxLevel();
         int tmpXY = common.getWidthHeight();
         int tmpDifference = checkDifference(level);
-        for (int i = 0; i < maxLevel - tmpDifference; i++) {
+
+        for (int i = 0; i < common.getMaxLevel() - tmpDifference; i++) {
             int countRandom = random.nextInt(0, countItems);
             switch (countRandom){
                 case 0:
@@ -51,13 +51,12 @@ public class GameItems implements Utils {
     }
 
     private int checkDifference(int level){
-        int tmpDifference = common.getDifferenceLevel() + level;
-
-        if (tmpDifference <= 5) tmpDifference = 16;
-        else if (tmpDifference <= 10) tmpDifference = 17;
-        else if (tmpDifference <= 15) tmpDifference = 18;
-        else if (tmpDifference <= 20) tmpDifference = 19;
-        return tmpDifference;
+        int result = 16;
+        if (level <= 5) result = 16;
+        else if (level <= 10) result = 17;
+        else if (level <= 15) result = 18;
+        else if (level <= 20) result = 19;
+        return result;
     }
 
     private int randomXY(int xy){

@@ -6,6 +6,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.input.KeyStroke;
+import domain.enums.StatusPlayer;
 
 import java.io.IOException;
 
@@ -45,7 +46,7 @@ public class View {
 
     }
 
-    public String inputScan() throws IOException{
+    public String inputScan() throws IOException, InterruptedException {
         StringBuilder res = new StringBuilder();
         screen.clear();
         char symbol;
@@ -53,7 +54,7 @@ public class View {
         textGraphics.putString(4, 2, "Enter name Player:");
         screen.refresh();
         do{
-            setKey();
+                 setKey    ();
             if((key.getCharacter() != ' ') && (key.getKeyType() == KeyType.Enter))
                 break;
             symbol = key.getCharacter();
@@ -115,10 +116,13 @@ public class View {
         return key;
     }
 
-    public void setKey() throws IOException {
+    public void setKey() throws IOException, InterruptedException {
         KeyStroke tmp = screen.readInput();
-        if(tmp != null)
+        long currentTime = System.currentTimeMillis();
+
+        if(tmp != null) {
             this.key = tmp;
+        }
     }
 
     public TerminalScreen getScreen() {
@@ -138,16 +142,15 @@ public class View {
     public void gameLoop() throws IOException {
         controller.getModel().gameInitialization();
         try{
-
-            while (true){
+            while (controller.getModel().getPlayer().getStatus() != StatusPlayer.OVER){
                 screen.clear();
-                if (this.key != null){
-                    if (this.key.getKeyType() == KeyType.Escape){
+                if (this.key != null) {
+                    if (this.key.getKeyType() == KeyType.Escape) {
                         viewGameOver();
-                        break;
+                        controller.getModel().getPlayer().setStatus(StatusPlayer.OVER);
                     }
 
-                    if (this.key.getKeyType() == KeyType.Character) {
+                    if (this.key.getKeyType() == KeyType.Character && (controller.getModel().getPlayer().getStatus() == StatusPlayer.ACTION)) {
                         controller.userInput(this.key, true);
                         viewController();
                     }
@@ -172,7 +175,7 @@ public class View {
 ////        screen.refresh();
 //    }
 
-    private void viewController() throws IOException {
+    private void viewController() throws IOException, InterruptedException {
         if (Character.toLowerCase(this.key.getCharacter()) == 'h') {
             viewSingleItemtype();
             setKey();

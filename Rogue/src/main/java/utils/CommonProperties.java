@@ -26,7 +26,6 @@ public class CommonProperties {
         }
     }
 
-
     public int getMaxLevel() {
         return Integer.parseInt(properties.getProperty("MAX_LEVEL"));
     }

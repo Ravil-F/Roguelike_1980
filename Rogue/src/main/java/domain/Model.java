@@ -23,19 +23,19 @@ public class Model {
         player = new Player();
         backpack = new Backpack();
         map = new Map();
-//        items = new GameItems();
-//        singleItemType = new LinkedList<>();
-//        level = 1;
+        items = new GameItems();
+        singleItemType = new LinkedList<>();
+        level = 1;
     }
 
     public void gameInitialization(){
-//        player.setStatus(StatusPlayer.ACTION);
-//        map.setMap(player.getCoord().getX(), player.getCoord().getY(), player.getSymbol());
-//
-//        items.generateRandomItems(level);
-//        for(int i = 0; i < items.getItems().size(); ++i) {
-//            map.setMap(items.getItems().get(i).getCoord().getX(), items.getItems().get(i).getCoord().getY(), items.getItems().get(i).getSymbol());
-//        }
+        player.setStatus(StatusPlayer.ACTION);
+        map.setMap(player.getCoord().getX(), player.getCoord().getY(), player.getSymbol());
+
+        items.generateRandomItems(level);
+        for(int i = 0; i < items.getItems().size(); ++i) {
+            map.setMap(items.getItems().get(i).getCoord().getX(), items.getItems().get(i).getCoord().getY(), items.getItems().get(i).getSymbol());
+        }
     }
 
     public void gameSession(){
@@ -47,33 +47,36 @@ public class Model {
     }
 
     public void movePlayer(final StatusE status) {
-        int tmpX = player.getCoord().getX();
-        int tmpY = player.getCoord().getY();
-        int oldX = tmpX;
-        int oldY = tmpY;
+        if (getPlayer().getStatus() == StatusPlayer.MOVE) {
+            System.out.println("world");
+            int tmpX = player.getCoord().getX();
+            int tmpY = player.getCoord().getY();
+            int oldX = tmpX;
+            int oldY = tmpY;
 
-        switch (status) {
-            case DOWN:
-                ++tmpY;
-                break;
-            case UP:
-                --tmpY;
-                break;
-            case LEFT:
-                --tmpX;
-                break;
-            case RIGHT:
-                ++tmpX;
-                break;
-            default:
-                throw new IllegalArgumentException("Invalid status");
-        }
+            switch (status) {
+                case DOWN:
+                    ++tmpY;
+                    break;
+                case UP:
+                    --tmpY;
+                    break;
+                case LEFT:
+                    --tmpX;
+                    break;
+                case RIGHT:
+                    ++tmpX;
+                    break;
+                default:
+                    throw new IllegalArgumentException("Invalid status");
+            }
 
-        if (tryMove(tmpX, tmpY)) {
-            map.putZero(oldX, oldY);
-            map.putZero(tmpX, tmpY);
-            player.setCoord(tmpX, tmpY);
-//            addPlayer(tmpX, tmpY);
+
+            if (tryMove(tmpX, tmpY)) {
+                map.putZero(oldX, oldY);
+                map.putZero(tmpX, tmpY);
+                player.setCoord(tmpX, tmpY);
+            }
         }
     }
 
