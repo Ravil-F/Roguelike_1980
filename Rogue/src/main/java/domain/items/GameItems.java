@@ -3,12 +3,15 @@ package domain.items;
 import domain.abstact.Items;
 import domain.enums.*;
 import domain.interfaces.Utils;
+import utils.CommonProperties;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 public class GameItems implements Utils {
+    CommonProperties common;
     private List<Items> items;
     private Random random;
     private final int countItems = 4;
@@ -16,13 +19,15 @@ public class GameItems implements Utils {
     public GameItems(){
         items = new LinkedList<Items>();
         random = new Random();
-        generateRandomItems();
+        common = new CommonProperties();
+//        generateRandomItems();
     }
 
-    private void generateRandomItems() {
-        int tmp = CommonE.MAX_LEVEL.getMaxLevel();
-        int tmpXY = MapE.WIDTH_HEIGHT.getWidth();
-        for (int i = 0; i < tmp - 15; i++) {
+    public void generateRandomItems(int level) {
+        int maxLevel = common.getMaxLevel();
+        int tmpXY = common.getWidthHeight();
+        int tmpDifference = checkDifference(level);
+        for (int i = 0; i < maxLevel - tmpDifference; i++) {
             int countRandom = random.nextInt(0, countItems);
             switch (countRandom){
                 case 0:
@@ -45,6 +50,16 @@ public class GameItems implements Utils {
         }
     }
 
+    private int checkDifference(int level){
+        int tmpDifference = common.getDifferenceLevel() + level;
+
+        if (tmpDifference <= 5) tmpDifference = 16;
+        else if (tmpDifference <= 10) tmpDifference = 17;
+        else if (tmpDifference <= 15) tmpDifference = 18;
+        else if (tmpDifference <= 20) tmpDifference = 19;
+        return tmpDifference;
+    }
+
     private int randomXY(int xy){
         int tmp =  random.nextInt(xy);
         if (isWithInBounds(tmp))
@@ -62,7 +77,7 @@ public class GameItems implements Utils {
 
     @Override
     public boolean isWithInBounds(int x) {
-        return x > 0 && x < MapE.WIDTH_HEIGHT.getWidth();
+        return x > 0 && x < common.getWidthHeight();
     }
 
     @Override

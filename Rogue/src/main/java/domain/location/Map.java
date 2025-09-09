@@ -1,19 +1,19 @@
 package domain.location;
 
-import domain.enums.MapE;
 import domain.interfaces.Utils;
+import utils.CommonProperties;
 
 import java.util.List;
 
 public class Map implements Utils {
     private List<Rooms> room;
     private List<Passage> passages;
-    private final int width = MapE.WIDTH_HEIGHT.getWidth();
-    private final int height = MapE.WIDTH_HEIGHT.getWidth();
+    private CommonProperties common;
     private int[][] map;
     
     public Map(){
-        this.map = new int[this.width][this.height];
+        common = new CommonProperties();
+        this.map = new int[this.common.getWidthHeight()][this.common.getWidthHeight()];
     }
 
     public String convertIntToString(int x, int y){
@@ -42,11 +42,11 @@ public class Map implements Utils {
     }
 
     public int getWidth() {
-        return width;
+        return common.getWidthHeight();
     }
 
     public int getHeight() {
-        return height;
+        return common.getWidthHeight();
     }
 
 
@@ -57,6 +57,6 @@ public class Map implements Utils {
 
     @Override
     public boolean isWithInBounds(int x, int y) {
-        return x > 0 && y > 0 && x < MapE.WIDTH_HEIGHT.getWidth() && y < MapE.WIDTH_HEIGHT.getWidth();
+        return x > 0 && y > 0 && x < common.getWidthHeight() && y < common.getWidthHeight();
     }
 }

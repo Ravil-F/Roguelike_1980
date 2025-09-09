@@ -2,6 +2,7 @@ package org.example;
 
 import com.googlecode.lanterna.input.KeyType;
 import domain.Model;
+import domain.enums.StatusPlayer;
 import presentation.Controller;
 import presentation.View;
 
@@ -23,7 +24,7 @@ public class Main {
     }
 
     private static void startGameLoop(View view, Controller controller, Model model) throws IOException{
-        while (true) {
+        while (controller.getModel().getPlayer().getStatus() != StatusPlayer.OVER) {
             view.setKey();
             if (view.getKey() != null) {
                 if (view.getKey().getKeyType() == KeyType.Character) {
@@ -43,7 +44,7 @@ public class Main {
                     }
                 }
                 if (view.getKey().getKeyType() == KeyType.Escape) {
-                    break;
+                    controller.getModel().getPlayer().setStatus(StatusPlayer.OVER);
                 }
             }
         }

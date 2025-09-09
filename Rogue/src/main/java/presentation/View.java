@@ -6,10 +6,8 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.input.KeyStroke;
-import domain.enums.MapE;
 
 import java.io.IOException;
-import java.security.Key;
 
 
 public class View {
@@ -80,10 +78,10 @@ public class View {
 
     private void viewInfo(){
         int count  = 2;
-        textGraphics.putString( 2, MapE.WIDTH_HEIGHT.getWidth() + count,"Max health: " + controller.getModel().getPlayer().getMaxHealth());
-        textGraphics.putString( 2, MapE.WIDTH_HEIGHT.getWidth() + (count + 1),"Health: " + controller.getModel().getPlayer().getHealth());
-        textGraphics.putString( 20, MapE.WIDTH_HEIGHT.getWidth() + count,"Agility: " + controller.getModel().getPlayer().getAgility());
-        textGraphics.putString( 20, MapE.WIDTH_HEIGHT.getWidth() + (count + 1),"Strength: " + controller.getModel().getPlayer().getStrength());
+        textGraphics.putString( 2, controller.getModel().getMap().getHeight() + count,"Max health: " + controller.getModel().getPlayer().getMaxHealth());
+        textGraphics.putString( 2, controller.getModel().getMap().getHeight() + (count + 1),"Health: " + controller.getModel().getPlayer().getHealth());
+        textGraphics.putString( 20, controller.getModel().getMap().getHeight() + count,"Agility: " + controller.getModel().getPlayer().getAgility());
+        textGraphics.putString( 20, controller.getModel().getMap().getHeight() + (count + 1),"Strength: " + controller.getModel().getPlayer().getStrength());
     }
 
     private void viewGameOver(){
@@ -98,7 +96,7 @@ public class View {
     }
 
     private void viewSingleItemtype() throws IOException {
-        int tmpX = MapE.WIDTH_HEIGHT.getWidth();
+        int tmpX = controller.getModel().getMap().getHeight();
         textGraphics.putString(tmpX + 2, 1, "Enter number items (0-8), Escape - exit");
         if (controller.getModel().getSingleItemType().isEmpty())
             textGraphics.putString(2, 2, "Not Items in Backpack");

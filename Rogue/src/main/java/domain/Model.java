@@ -3,9 +3,11 @@ package domain;
 import domain.abstact.Items;
 import domain.backpack.Backpack;
 import domain.enums.StatusE;
+import domain.enums.StatusPlayer;
 import domain.items.GameItems;
 import domain.location.Map;
 import domain.player.Player;
+import utils.CommonProperties;
 
 import java.util.*;
 
@@ -15,21 +17,25 @@ public class Model {
     private Map map;
     private GameItems items;
     private List<Items> singleItemType;
+    private int level;
 
     public Model(){
         player = new Player();
         backpack = new Backpack();
         map = new Map();
-        items = new GameItems();
-        singleItemType = new LinkedList<>();
+//        items = new GameItems();
+//        singleItemType = new LinkedList<>();
+//        level = 1;
     }
 
     public void gameInitialization(){
-        map.setMap(player.getCoord().getX(), player.getCoord().getY(), player.getSymbol());
-
-        for(int i = 0; i < items.getItems().size(); ++i) {
-            map.setMap(items.getItems().get(i).getCoord().getX(), items.getItems().get(i).getCoord().getY(), items.getItems().get(i).getSymbol());
-        }
+//        player.setStatus(StatusPlayer.ACTION);
+//        map.setMap(player.getCoord().getX(), player.getCoord().getY(), player.getSymbol());
+//
+//        items.generateRandomItems(level);
+//        for(int i = 0; i < items.getItems().size(); ++i) {
+//            map.setMap(items.getItems().get(i).getCoord().getX(), items.getItems().get(i).getCoord().getY(), items.getItems().get(i).getSymbol());
+//        }
     }
 
     public void gameSession(){
