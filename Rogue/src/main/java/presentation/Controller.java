@@ -22,16 +22,16 @@ public class Controller {
             if (key.getKeyType() == KeyType.Character) {
                 switch (Character.toLowerCase(key.getCharacter())) {
                     case 'w':
-                        model.movePlayer(StatusE.UP.ordinal());
+                        model.movePlayer(StatusE.UP);
                         break;
                     case 's':
-                        model.movePlayer(StatusE.DOWN.ordinal());
+                        model.movePlayer(StatusE.DOWN);
                         break;
                     case 'a':
-                        model.movePlayer(StatusE.LEFT.ordinal());
+                        model.movePlayer(StatusE.LEFT);
                         break;
                     case 'd':
-                        model.movePlayer(StatusE.RIGHT.ordinal());
+                        model.movePlayer(StatusE.RIGHT);
                         break;
                     case 'h':
                         model.openBackpack('w');

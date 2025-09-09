@@ -2,6 +2,7 @@ package domain;
 
 import domain.abstact.Items;
 import domain.backpack.Backpack;
+import domain.enums.StatusE;
 import domain.items.GameItems;
 import domain.location.Map;
 import domain.player.Player;
@@ -9,15 +10,14 @@ import domain.player.Player;
 import java.util.*;
 
 public class Model {
-    private List<Player> player;
+    private Player player;
     private Backpack backpack;
     private Map map;
     private GameItems items;
     private List<Items> singleItemType;
 
     public Model(){
-        player = new LinkedList<Player>();
-        player.addFirst(new Player());
+        player = new Player();
         backpack = new Backpack();
         map = new Map();
         items = new GameItems();
@@ -25,7 +25,7 @@ public class Model {
     }
 
     public void gameInitialization(){
-        map.setMap(player.getFirst().getCoord().getX(), player.getFirst().getCoord().getY(), player.getFirst().getSymbol());
+        map.setMap(player.getCoord().getX(), player.getCoord().getY(), player.getSymbol());
 
         for(int i = 0; i < items.getItems().size(); ++i) {
             map.setMap(items.getItems().get(i).getCoord().getX(), items.getItems().get(i).getCoord().getY(), items.getItems().get(i).getSymbol());
@@ -33,30 +33,30 @@ public class Model {
     }
 
     public void gameSession(){
-        map.setMap(player.getFirst().getCoord().getX(), player.getFirst().getCoord().getY(), player.getFirst().getSymbol());
+        map.setMap(player.getCoord().getX(), player.getCoord().getY(), player.getSymbol());
     }
 
     public void passName(String line){
-        player.getFirst().setName(line);
+        player.setName(line);
     }
 
-    public void movePlayer(final int status) {
-        int tmpX = player.getFirst().getCoord().getX();
-        int tmpY = player.getFirst().getCoord().getY();
+    public void movePlayer(final StatusE status) {
+        int tmpX = player.getCoord().getX();
+        int tmpY = player.getCoord().getY();
         int oldX = tmpX;
         int oldY = tmpY;
 
         switch (status) {
-            case 0:
+            case DOWN:
                 ++tmpY;
                 break;
-            case 1:
+            case UP:
                 --tmpY;
                 break;
-            case 2:
+            case LEFT:
                 --tmpX;
                 break;
-            case 3:
+            case RIGHT:
                 ++tmpX;
                 break;
             default:
@@ -66,7 +66,8 @@ public class Model {
         if (tryMove(tmpX, tmpY)) {
             map.putZero(oldX, oldY);
             map.putZero(tmpX, tmpY);
-            addPlayer(tmpX, tmpY);
+            player.setCoord(tmpX, tmpY);
+//            addPlayer(tmpX, tmpY);
         }
     }
 
@@ -85,23 +86,11 @@ public class Model {
             backpack.printBackpack();
             System.out.println("-----------------------------------");
             map.putZero(x, y);
-            map.putZero(player.getFirst().getCoord().getX(), player.getFirst().getCoord().getY());
-            addPlayer(x, y);
+            map.putZero(player.getCoord().getX(), player.getCoord().getY());
+            player.setCoord(x, y);
             return true;
         }
         return false;
-    }
-
-    private void addPlayer(int x, int y){
-        player.addFirst(new Player(player.getFirst().getName(),
-                player.getFirst().getSymbol(),
-                player.getFirst().getColor(),
-                player.getFirst().getMaxHealth(),
-                player.getFirst().getHealth(),
-                player.getFirst().getAgility(),
-                player.getFirst().getStrength(),
-                x, y));
-        player.removeLast();
     }
 
     private int equalsMapItems(int x, int y, GameItems items){
@@ -124,7 +113,7 @@ public class Model {
 
     //get - set metod
     public Player getPlayer() {
-        return player.getFirst();
+        return player;
     }
 
     public Map getMap() {

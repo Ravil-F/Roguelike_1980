@@ -38,9 +38,11 @@ public abstract class Entity {
         return coord;
     }
 
-//    public void setCoord(int x, int y) {
-//        this.coord = coord.add(x, y);
-//    }
+    public void setCoord(int x, int y) {
+        this.coord.setX(x);
+        this.coord.setY(y);
+    }
+
     public void setCoordX(int x){
         this.coord.setX(x);
     }
